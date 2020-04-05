@@ -11,9 +11,9 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] const char **argv)
   assert(NULL != app && "main() Can't create Application");
 
   // Handle any command line arguments passed in
-  app->ProcessArguments(argc, argv);
+  app->processArguments(argc, argv);
 
-  exitCode = app->Run();
+  exitCode = app->run();
 
   // Delete reference to app
   app.reset(nullptr);

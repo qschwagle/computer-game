@@ -1,3 +1,5 @@
+subdir('Traits')
+subdir('Engine')
 subdir('Game')
 
 runtime_sources = [
@@ -9,6 +11,7 @@ runtime_headers = [
 ]
 
 runtime_deps = [
+  engine_dep,
   game_dep
 ]
 
