@@ -8,9 +8,10 @@ namespace Game {
 
 class Application {
   public:
-    Application();
+    Application(void);
     virtual ~Application();
 
+    // We're a singleton
     Application(const Application&) = delete;
     Application& operator=(const Application&) = delete;
 
