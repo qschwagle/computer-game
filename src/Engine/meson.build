@@ -1,9 +1,12 @@
 engine_sources = [
  'Window.cpp',
+ 'StateStack.cpp'
 ]
 
 engine_headers = [
   'Window.hpp',
+  'IState.hpp',
+  'StateStack.hpp'
 ]
 
 engine_deps = [

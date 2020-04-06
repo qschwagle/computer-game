@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "Window.hpp"
+#include "StateStack.hpp"
 #include "NoCopy.hpp"
 #include "NoMove.hpp"
 
@@ -20,9 +21,10 @@ class Application : public Traits::NoCopy, public Traits::NoMove {
     int run(void);
 
   protected:
+    sf::Event m_event;
     sf::Clock m_clock;
     sf::Time m_elapsed_time;
-    float m_dt;
+    float m_frame_time;
     /**
      * @brief Associated window
      *
@@ -30,13 +32,19 @@ class Application : public Traits::NoCopy, public Traits::NoMove {
     std::shared_ptr<Engine::Window> m_window;
 
     /**
-     * @brief Thigns to do before each frame
+     * @brief Game state stack
+     *
+     */
+    std::shared_ptr<Engine::StateStack> m_stack;
+
+    /**
+     * @brief Things to do before each frame
      *
      */
     void preFrame();
 
     /**
-     * @brief Thigns to do during a frame
+     * @brief Things to do during a frame
      *
      */
     void onFrame();
@@ -55,13 +63,13 @@ class Application : public Traits::NoCopy, public Traits::NoMove {
     void loop();
 
     /**
-     * @brief get the elapsed time
+     * @brief Get the elapsed time
      *
      */
     sf::Time getElapsedTime();
 
     /**
-     * @brief restart the clock
+     * @brief Restart the clock
      *
      */
     void restartClock();

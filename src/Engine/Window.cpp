@@ -26,23 +26,23 @@ std::shared_ptr<sf::RenderWindow> Engine::Window::getWindow() const {
   return m_window;
 }
 
-void Engine::Window::pollEvent() {
-  while (m_window->pollEvent(m_event)) {
-    if (m_event.type == sf::Event::Closed) {
+void Engine::Window::pollEvent(sf::Event& t_event) {
+  while (m_window->pollEvent(t_event)) {
+    if (t_event.type == sf::Event::Closed) {
       m_window->close();
     }
 
-    if ((m_event.type == sf::Event::KeyPressed) && (m_event.key.code == sf::Keyboard::F4)) {
+    if ((t_event.type == sf::Event::KeyPressed) && (t_event.key.code == sf::Keyboard::F4)) {
       m_window->close();
     }
 
-    if ((m_event.type == sf::Event::KeyPressed) && (m_event.key.code == sf::Keyboard::F5)) {
+    if ((t_event.type == sf::Event::KeyPressed) && (t_event.key.code == sf::Keyboard::F5)) {
       setFullscreen(!m_fullscreen);
     }
 
-    if(m_event.type == sf::Event::Resized && !m_fullscreen) {
-      m_window_width = m_event.size.width;
-      m_window_height = m_event.size.height;
+    if(t_event.type == sf::Event::Resized && !m_fullscreen) {
+      m_window_width = t_event.size.width;
+      m_window_height = t_event.size.height;
       float new_width = m_initial_aspect_ratio * m_window_height;
       float new_height = m_window_width / m_initial_aspect_ratio;
       float offset_width = (m_window_width - new_width) / 2.0;
@@ -58,8 +58,8 @@ void Engine::Window::pollEvent() {
       m_window->setView(view);
     }
 
-    if (m_event.type == sf::Event::LostFocus) {}
-    if (m_event.type == sf::Event::GainedFocus) {}
+    if (t_event.type == sf::Event::LostFocus) {}
+    if (t_event.type == sf::Event::GainedFocus) {}
   }
 }
 

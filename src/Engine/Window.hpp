@@ -47,7 +47,7 @@ namespace Engine {
        * @brief Polls window events and responds properly
        *
        */
-      void pollEvent();
+      void pollEvent(sf::Event& t_event);
 
       /**
        * @brief Returns whether the window is open and showing
@@ -61,6 +61,9 @@ namespace Engine {
       void setFps(float t_fps);
       float getFps() const;
 
+      std::unique_ptr<sf::Event> getEvent();
+
+
     private:
       /**
        * @brief Window object
@@ -72,11 +75,5 @@ namespace Engine {
       bool m_fullscreen;
       float m_fps;
       float m_initial_aspect_ratio;
-
-      /**
-       * @brief Saves events in this variable
-       *
-       */
-      sf::Event m_event;
   };
 } // namespace Engine
