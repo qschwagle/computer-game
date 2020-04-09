@@ -1,5 +1,6 @@
 subdir('Traits')
 subdir('Engine')
+subdir('Bindings')
 subdir('Game')
 
 runtime_sources = [

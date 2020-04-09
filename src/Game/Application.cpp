@@ -33,6 +33,7 @@ int Application::run() {
 void Application::loop() {
   sf::Time previous = m_clock.getElapsedTime();
   sf::Time lag = sf::Time::Zero;
+
   while(m_window->isOpen() && !m_stack->isEmpty())
   {
     sf::Time current = m_clock.getElapsedTime();
