@@ -3,14 +3,13 @@
 #include <iostream>
 #include <memory>
 
+#include "Constant.hpp"
 #include "Window.hpp"
 #include "StateStack.hpp"
 #include "NoCopy.hpp"
 #include "NoMove.hpp"
 
-namespace Game {
-  const int NoError = 0;
-}
+#include "States/TempState.hpp"
 
 class Application : public Traits::NoCopy, public Traits::NoMove {
   public:
@@ -23,8 +22,7 @@ class Application : public Traits::NoCopy, public Traits::NoMove {
   protected:
     sf::Event m_event;
     sf::Clock m_clock;
-    sf::Time m_elapsed_time;
-    float m_frame_time;
+    sf::Time m_frame_time;
     /**
      * @brief Associated window
      *
@@ -37,40 +35,11 @@ class Application : public Traits::NoCopy, public Traits::NoMove {
      */
     std::shared_ptr<Engine::StateStack> m_stack;
 
-    /**
-     * @brief Things to do before each frame
-     *
-     */
-    void preFrame();
-
-    /**
-     * @brief Things to do during a frame
-     *
-     */
-    void onFrame();
-
-    /**
-     * @brief Things to do after a frame
-     *
-     */
-    void postFrame();
-
+    void init(void);
 
     /**
      * @brief The game loop which runs every frame, calls preFrame, onFrame, postFrame respectively
      *
      */
     void loop();
-
-    /**
-     * @brief Get the elapsed time
-     *
-     */
-    sf::Time getElapsedTime();
-
-    /**
-     * @brief Restart the clock
-     *
-     */
-    void restartClock();
 };

@@ -3,10 +3,10 @@
 #include <memory>
 #include <vector>
 
-#include "IState.hpp"
 #include "Window.hpp"
 
 namespace Engine {
+  class IState;
   class StateStack {
     public:
 
@@ -41,12 +41,18 @@ namespace Engine {
       std::shared_ptr<Engine::IState> top(void);
 
       /**
-       * @brief Runs through the stack in decending order and calls state update() and handleInput() methods
+       * @brief Runs the handle input function for the state on top of the stack
        *
-       * @param t_dt the delta time between last frame
        * @param t_event the event off the top of the event queue this frame
        */
-      void update(float t_dt, sf::Event t_event);
+      void handleInput(sf::Event t_event);
+
+      /**
+       * @brief Runs through the stack in decending order and calls state update()
+       *
+       * @param t_dt the delta time between last frame
+       */
+      void update(float t_dt);
 
       /**
        * @brief Runs through the stack in decending order and calls each state render() method
@@ -54,6 +60,14 @@ namespace Engine {
        * @param t_window the window reference for drawing
        */
       void render(std::shared_ptr<Engine::Window> t_window);
+
+      /**
+       * @brief Tells if there is any state in the stack or not
+       *
+       * @return True The stack is empty
+       * @return False The stack has state running
+       */
+      bool isEmpty(void);
 
     protected:
       /**

@@ -5,11 +5,10 @@
 #include "Window.hpp"
 
 namespace Engine {
+  class StateStack;
   class IState {
     public:
-      IState(void) = default;
-      virtual ~IState(void);
-
+      virtual ~IState(void) { };
       /**
        * @brief runs on update step of each frame
        *
@@ -18,29 +17,32 @@ namespace Engine {
        * @return True continue running states after this one
        * @return False this state is blocking, abort the update step
        */
-      virtual bool update(float t_dt);
+      virtual bool update(float t_dt) = 0;
 
       /**
        * @brief runs on the render step of each frame
        *
        * @param t_window the reference to the window
        */
-      virtual void render(std::shared_ptr<Engine::Window> t_window);
+      virtual void render(std::shared_ptr<Engine::Window> t_window) = 0;
 
       /**
        * @brief runs after the update step before the render step
        *
        */
-      virtual void handleInput(sf::Event t_event);
+      virtual void handleInput(sf::Event t_event) = 0;
 
       /**
        * @brief runs when the state is entered
        */
-      virtual void enter(void);
+      virtual void enter(void) = 0;
 
       /**
        * @brief runs when the state is exited
        */
-      virtual void exit(void);
+      virtual void exit(void) = 0;
+
+    protected:
+      std::shared_ptr<Engine::StateStack> m_stack;
   };
-}
+} // Namespace Engine

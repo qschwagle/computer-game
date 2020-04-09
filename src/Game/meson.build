@@ -1,18 +1,20 @@
 game_sources = [
-  'Application.cpp'
+  'Application.cpp',
+  'States/TempState.cpp'
 ]
 
 game_headers = [
-  'Application.hpp'
+  'Application.hpp',
+  'States/TempState.hpp'
 ]
 
 game_deps = [
-  engine_dep
+  engine_dep,
 ]
 
 game_includes = [
   engine_inc,
-  traits_inc
+  traits_inc,
 ]
 
 game_lib = static_library('computergame.game', game_sources + game_headers, dependencies: game_deps, include_directories: game_includes)

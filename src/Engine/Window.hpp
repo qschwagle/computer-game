@@ -50,6 +50,12 @@ namespace Engine {
       void pollEvent(sf::Event& t_event);
 
       /**
+       * @brief Passes whatever is passed into the m_window->draw() function
+       *
+       */
+      void draw(const sf::Drawable &drawable, const sf::RenderStates &states=sf::RenderStates::Default);
+
+      /**
        * @brief Returns whether the window is open and showing
        *
        * @return true
