@@ -23,7 +23,12 @@ class TempState : public Engine::IState {
     void exit(void) override;
 
   protected:
-    sf::Clock m_clock;
-    std::unique_ptr<sf::CircleShape> m_circle;
-    std::unique_ptr<Engine::Tween> m_tween;
+    sf::Texture m_tex;
+    sf::Sprite m_sprite;
+    // std::vector<unsigned int> m_map{
+      // 1,1,1,1,
+      // 1,2,2,1,
+      // 1,1,2,1,
+      // 1,1,1,1,
+    // }
 };

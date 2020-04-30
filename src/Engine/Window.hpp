@@ -3,9 +3,11 @@
 #include <memory>
 #include <string>
 #include <iostream>
+#include <cmath>
 
 #include <SFML/Graphics.hpp>
 
+#include "Constant.hpp"
 #include "NoCopy.hpp"
 #include "NoMove.hpp"
 
@@ -41,7 +43,7 @@ namespace Engine {
        * @brief Get the sf::RenderWindow object
        *
        */
-      std::shared_ptr<sf::RenderWindow> getWindow() const;
+      std::shared_ptr<sf::RenderWindow> getNativeWindow() const;
 
       /**
        * @brief Polls window events and responds properly
@@ -54,6 +56,10 @@ namespace Engine {
        *
        */
       void draw(const sf::Drawable &drawable, const sf::RenderStates &states=sf::RenderStates::Default);
+
+      void reset(void) const;
+
+      void display(void) const;
 
       /**
        * @brief Returns whether the window is open and showing
@@ -68,6 +74,9 @@ namespace Engine {
       float getFps() const;
 
       std::unique_ptr<sf::Event> getEvent();
+
+      sf::View calcView(const float t_window_width, const float t_window_height);
+
 
 
     private:

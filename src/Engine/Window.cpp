@@ -22,7 +22,7 @@ Engine::Window::~Window() {
   m_window.reset();
 }
 
-std::shared_ptr<sf::RenderWindow> Engine::Window::getWindow() const {
+std::shared_ptr<sf::RenderWindow> Engine::Window::getNativeWindow() const {
   return m_window;
 }
 
@@ -41,23 +41,7 @@ void Engine::Window::pollEvent(sf::Event& t_event) {
     }
 
     if(t_event.type == sf::Event::Resized && !m_fullscreen) {
-      sf::FloatRect visibleArea(0,0, t_event.size.width, t_event.size.height);
-      m_window->setView(sf::View(visibleArea));
-      // m_window_width = t_event.size.width;
-      // m_window_height = t_event.size.height;
-      // float new_width = m_initial_aspect_ratio * m_window_height;
-      // float new_height = m_window_width / m_initial_aspect_ratio;
-      // float offset_width = (m_window_width - new_width) / 2.0;
-      // float offset_height = (m_window_height - new_height) / 2.0;
-      // sf::View view = m_window->getDefaultView();
-
-      // if (m_window_width >= m_initial_aspect_ratio * m_window_height) {
-        // view.setViewport(sf::FloatRect(offset_width / m_window_width, 0.0, new_width / m_window_width, 1.0));
-      // } else {
-        // view.setViewport(sf::FloatRect(0.0, offset_height / m_window_height, 1.0, new_height / m_window_height));
-      // }
-
-      // m_window->setView(view);
+      m_window->setView(calcView(t_event.size.width, t_event.size.height));
     }
 
     if (t_event.type == sf::Event::LostFocus) {}
@@ -73,6 +57,7 @@ bool Engine::Window::isOpen() {
   return m_window->isOpen();
 }
 
+// Probably fucked
 void Engine::Window::setFullscreen(bool t_fullscreen) {
   // If not already fullscreen, and fullscreen was requested
   if (!m_fullscreen && t_fullscreen) {
@@ -102,4 +87,45 @@ void Engine::Window::setFps(float t_fps) {
 
 float Engine::Window::getFps() const {
   return m_fps;
+}
+
+sf::View Engine::Window::calcView(const float t_window_width, const float t_window_height) {
+  sf::FloatRect viewport(0.0f, 0.0f, 1.0f, 1.0f);
+
+  // Find the best viewport size given the window size
+  float new_ratio = t_window_width / t_window_height;
+  if (new_ratio > Engine::AspectRatio) {
+    float bound_width = t_window_height * Engine::AspectRatio;
+    float width_diff = t_window_width - bound_width;
+    float width_perc = width_diff / t_window_width;
+    viewport.left = width_perc / 2.0f;
+    viewport.width = 1.0f - width_perc;
+  } else {
+    float bound_height = t_window_width / Engine::AspectRatio;
+    float height_diff = t_window_height - bound_height;
+    float height_perc = height_diff / t_window_height;
+    viewport.top = height_perc / 2.0f;
+    viewport.height = 1.0f - height_perc;
+  }
+
+  // To ensure our pixels aren't stretched, scale the resolution to match monitor
+  float scale = (viewport.width * t_window_width) / Engine::NativeWidth;
+  scale = (Engine::NativeWidth - (t_window_width / floor(scale)) < (t_window_width / ceil(scale)) - Engine::NativeWidth) ?
+    floor(scale) :
+    ceil(scale);
+
+
+  sf::View view(sf::FloatRect(0, 0, t_window_width / scale, t_window_height / scale));
+  view.setViewport(viewport);
+
+  return view;
+}
+
+void Engine::Window::reset(void) const {
+  m_window->setActive(true);
+  m_window->clear(sf::Color(51, 51, 51));
+}
+
+void Engine::Window::display(void) const {
+  m_window->display();
 }

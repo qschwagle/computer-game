@@ -51,14 +51,13 @@ void Application::loop() {
     }
 
     // Reset the window
-    m_window->getWindow()->setActive(true);
-    m_window->getWindow()->clear(sf::Color::Black);
+    m_window->reset();
 
     // Render
     m_stack->render(m_window);
 
     // Display the new buffer
-    m_window->getWindow()->display();
+    m_window->display();
   }
 }
 
