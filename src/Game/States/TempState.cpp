@@ -1,13 +1,8 @@
 #include "TempState.hpp"
+#include "Application.hpp"
 
 TempState::TempState(std::shared_ptr<Engine::StateStack> t_stack) {
   m_stack = t_stack;
-  if (!m_tex.loadFromFile("assets/wee_sliced/portraits/wee_portrait_mage.png")) {
-    std::cerr << "She's bworked m8." << std::endl;
-  }
-  m_sprite.setPosition(0, 0);
-  m_sprite.setTexture(m_tex);
-  // m_sprite.setTextureRect(sf::IntRect(8, 8, 16, 16));
 }
 
 bool TempState::update([[maybe_unused]] float t_dt) {
@@ -15,11 +10,24 @@ bool TempState::update([[maybe_unused]] float t_dt) {
 }
 
 void TempState::render(std::shared_ptr<Engine::Window> t_window) {
-  t_window->draw(m_sprite);
+  std::cout << "TempState::render()" << std::endl;
+  for (int n = 0; n < tilesPerCol; ++n) {
+    for (int i = 0; i < tilesPerRow; ++i) {
+      sf::Sprite sprite;
+      sf::Texture temp = Helper::getTexture(Texture::ForestAtlas);
+      sprite.setTexture(Helper::getTexture(Texture::ForestAtlas));
+
+      sprite.setPosition(0, 0);
+      // sprite.setPosition(i * Engine::TileSize, n * Engine::TileSize);
+
+      t_window->draw(sprite);
+    }
+  }
 }
 
 void TempState::handleInput([[maybe_unused]] sf::Event t_event) {
 }
+
 
 void TempState::enter(void) {
 }

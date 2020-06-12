@@ -94,26 +94,30 @@ sf::View Engine::Window::calcView(const float t_window_width, const float t_wind
 
   // Find the best viewport size given the window size
   float new_ratio = t_window_width / t_window_height;
+  float scale = 1.0f;
   if (new_ratio > Engine::AspectRatio) {
     float bound_width = t_window_height * Engine::AspectRatio;
     float width_diff = t_window_width - bound_width;
     float width_perc = width_diff / t_window_width;
     viewport.left = width_perc / 2.0f;
     viewport.width = 1.0f - width_perc;
+
+    // scale = (viewport.width * t_window_width) / bound_width;
+    // scale = (bound_width - (t_window_width / floor(scale)) < (t_window_width / ceil(scale)) - bound_width) ?
+      // floor(scale) :
+      // ceil(scale);
   } else {
     float bound_height = t_window_width / Engine::AspectRatio;
     float height_diff = t_window_height - bound_height;
     float height_perc = height_diff / t_window_height;
     viewport.top = height_perc / 2.0f;
     viewport.height = 1.0f - height_perc;
+
+    // scale = (viewport.height * t_window_height) / bound_height;
+    // scale = (bound_height - (t_window_height / floor(scale)) < (t_window_height / ceil(scale)) - bound_height) ?
+      // floor(scale) :
+      // ceil(scale);
   }
-
-  // To ensure our pixels aren't stretched, scale the resolution to match monitor
-  float scale = (viewport.width * t_window_width) / Engine::NativeWidth;
-  scale = (Engine::NativeWidth - (t_window_width / floor(scale)) < (t_window_width / ceil(scale)) - Engine::NativeWidth) ?
-    floor(scale) :
-    ceil(scale);
-
 
   sf::View view(sf::FloatRect(0, 0, t_window_width / scale, t_window_height / scale));
   view.setViewport(viewport);

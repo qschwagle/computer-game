@@ -1,10 +1,19 @@
 #include "Application.hpp"
 
-void Application::processArguments([[maybe_unused]] int argc, [[maybe_unused]] const char **argv) {
+Application& Application::instance(void) {
+  // std::cout << "Application::instance()" << std::endl;
+  static Application m_instance;
+  return m_instance;
+}
 
+void Application::processArguments([[maybe_unused]] int argc, [[maybe_unused]] const char **argv) {
+  // Might do stuff here later
 }
 
 void Application::init() {
+  // std::cout << "Application::init()" << std::endl;
+  // Load configs & manifest
+  m_manifest = *Helper::loadJson("assets/manifest.json");
 
   // Create window
   m_window = std::make_shared<Engine::Window>();
@@ -14,7 +23,8 @@ void Application::init() {
   m_stack = std::make_shared<Engine::StateStack>();
 
   // Seed random?
-  // Load assets?
+  // Load assets
+  loadTextures();
 }
 
 int Application::run() {
@@ -31,6 +41,8 @@ int Application::run() {
 }
 
 void Application::loop() {
+  // std::cout << "Application::loop()" << std::endl;
+
   sf::Time previous = m_clock.getElapsedTime();
   sf::Time lag = sf::Time::Zero;
 
@@ -61,3 +73,13 @@ void Application::loop() {
   }
 }
 
+void Application::loadTextures() {
+  // std::cout << "Application::loadTextures()" << std::endl;
+  int i = 0;
+  for (auto& el: m_manifest["textures"].items()) {
+    auto texture = std::make_shared<sf::Texture>();
+    texture->loadFromFile(el.value());
+
+    m_textures[i++] = texture;
+  }
+}

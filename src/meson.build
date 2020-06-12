@@ -1,6 +1,5 @@
 subdir('Traits')
 subdir('Engine')
-subdir('Bindings')
 subdir('Game')
 
 runtime_sources = [
@@ -12,12 +11,14 @@ runtime_headers = [
 ]
 
 runtime_deps = [
+  json_dep,
   engine_dep,
-  game_dep
+  game_dep,
 ]
 
 runtime_includes = [
-  include_directories('.')
+  include_directories('.'),
+  game_inc
 ]
 
 executable('computergame.runtime',

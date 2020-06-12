@@ -6,6 +6,9 @@
 #include "Tween.hpp"
 #include "IState.hpp"
 #include "Window.hpp"
+#include "Application.hpp"
+#include "Helper.hpp"
+
 
 class TempState : public Engine::IState {
   public:
@@ -24,11 +27,14 @@ class TempState : public Engine::IState {
 
   protected:
     sf::Texture m_tex;
-    sf::Sprite m_sprite;
-    // std::vector<unsigned int> m_map{
-      // 1,1,1,1,
-      // 1,2,2,1,
-      // 1,1,2,1,
-      // 1,1,1,1,
-    // }
+
+    int tilesPerRow = Engine::NativeWidth / Engine::TileSize;
+    int tilesPerCol = Engine::NativeHeight / Engine::TileSize;
+
+    std::vector<unsigned int> m_map{
+      1,1,1,1,
+      1,2,2,1,
+      1,1,2,1,
+      1,1,1,1,
+    };
 };

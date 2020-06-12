@@ -5,4 +5,5 @@ namespace Engine {
   const float AspectRatio = 16.0 / 9.0;
   const unsigned int NativeWidth = 512;
   const unsigned int NativeHeight = 288;
+  const unsigned int TileSize = 8;
 }

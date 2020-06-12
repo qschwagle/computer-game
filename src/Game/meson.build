@@ -1,14 +1,17 @@
 game_sources = [
   'Application.cpp',
+  'Helper.cpp',
   'States/TempState.cpp'
 ]
 
 game_headers = [
   'Application.hpp',
+  'Helper.hpp',
   'States/TempState.hpp'
 ]
 
 game_deps = [
+  json_dep,
   engine_dep,
 ]
 

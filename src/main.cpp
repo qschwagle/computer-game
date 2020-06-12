@@ -8,8 +8,8 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] const char **argv)
 {
   int exitCode = Engine::NoError;
 
-  auto app = std::make_unique<Application>();
-  assert(NULL != app && "main() Can't create Application");
+  auto app = &Application::instance();
+  assert(app != nullptr && "main() Can't create Application");
 
   // Handle any command line arguments passed in
   app->processArguments(argc, argv);
@@ -17,7 +17,8 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] const char **argv)
   exitCode = app->run();
 
   // Delete reference to app
-  app.reset(nullptr);
+  delete app;
+  app = nullptr;
 
   std::exit(exitCode);
 }
