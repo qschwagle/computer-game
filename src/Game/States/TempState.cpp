@@ -3,6 +3,9 @@
 
 TempState::TempState(std::shared_ptr<Engine::StateStack> t_stack) {
   m_stack = t_stack;
+  m_tex = Helper::getTexture(Texture::ForestAtlas);
+  m_uvs = *Helper::getTileRects(Engine::TileSize, Engine::TileSize, 4, 2, 10, 10, 10, 10);
+  m_sprite.setTexture(m_tex);
 }
 
 bool TempState::update([[maybe_unused]] float t_dt) {
@@ -10,18 +13,10 @@ bool TempState::update([[maybe_unused]] float t_dt) {
 }
 
 void TempState::render(std::shared_ptr<Engine::Window> t_window) {
-  std::cout << "TempState::render()" << std::endl;
-  for (int n = 0; n < tilesPerCol; ++n) {
-    for (int i = 0; i < tilesPerRow; ++i) {
-      sf::Sprite sprite;
-      sf::Texture temp = Helper::getTexture(Texture::ForestAtlas);
-      sprite.setTexture(Helper::getTexture(Texture::ForestAtlas));
-
-      sprite.setPosition(0, 0);
-      // sprite.setPosition(i * Engine::TileSize, n * Engine::TileSize);
-
-      t_window->draw(sprite);
-    }
+  for (int i = 0; i < tilesPerCol * tilesPerRow; ++i) {
+      m_sprite.setTextureRect(m_uvs[0]);
+      m_sprite.setPosition((i % tilesPerCol) * Engine::TileSize, (i / tilesPerRow) * Engine::TileSize);
+      t_window->draw(m_sprite);
   }
 }
 

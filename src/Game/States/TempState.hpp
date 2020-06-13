@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <math.h>
 
 #include "StateStack.hpp"
 #include "Tween.hpp"
@@ -26,15 +27,17 @@ class TempState : public Engine::IState {
     void exit(void) override;
 
   protected:
+    sf::Sprite m_sprite;
     sf::Texture m_tex;
+    std::vector<sf::IntRect> m_uvs;
 
-    int tilesPerRow = Engine::NativeWidth / Engine::TileSize;
-    int tilesPerCol = Engine::NativeHeight / Engine::TileSize;
+    int tilesPerRow = ceil(Engine::NativeWidth / Engine::TileSize);
+    int tilesPerCol = ceil(Engine::NativeHeight / Engine::TileSize);
 
-    std::vector<unsigned int> m_map{
-      1,1,1,1,
-      1,2,2,1,
-      1,1,2,1,
-      1,1,1,1,
-    };
+    // std::vector<unsigned int> m_map{
+      // 1,1,1,1,
+      // 1,2,2,1,
+      // 1,1,2,1,
+      // 1,1,1,1,
+    // };
 };
