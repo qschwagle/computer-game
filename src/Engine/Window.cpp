@@ -94,7 +94,7 @@ sf::View Engine::Window::calcView(const float t_window_width, const float t_wind
 
   // Find the best viewport size given the window size
   float new_ratio = t_window_width / t_window_height;
-  float scale = 1.0f;
+  // float scale = 1.0f;
   if (new_ratio > Engine::AspectRatio) {
     float bound_width = t_window_height * Engine::AspectRatio;
     float width_diff = t_window_width - bound_width;
@@ -119,7 +119,8 @@ sf::View Engine::Window::calcView(const float t_window_width, const float t_wind
       // ceil(scale);
   }
 
-  sf::View view(sf::FloatRect(0, 0, t_window_width / scale, t_window_height / scale));
+  // sf::View view(sf::FloatRect(0, 0, t_window_width / scale, t_window_height / scale));
+  sf::View view(sf::FloatRect(0, 0, Engine::NativeWidth, Engine::NativeHeight));
   view.setViewport(viewport);
 
   return view;

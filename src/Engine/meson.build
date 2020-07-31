@@ -2,6 +2,7 @@ engine_sources = [
   'Window.cpp',
   'StateStack.cpp',
   'Tween.cpp',
+  'Animation.cpp'
 ]
 
 engine_headers = [
@@ -10,6 +11,7 @@ engine_headers = [
   'StateStack.hpp',
   'IState.hpp',
   'Tween.hpp',
+  'Animation.hpp'
 ]
 
 engine_deps = [

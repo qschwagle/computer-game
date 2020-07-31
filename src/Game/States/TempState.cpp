@@ -3,9 +3,17 @@
 
 TempState::TempState(std::shared_ptr<Engine::StateStack> t_stack) {
   m_stack = t_stack;
-  m_tex = Helper::getTexture(Texture::ForestAtlas);
-  m_uvs = *Helper::getTileRects(Engine::TileSize, Engine::TileSize, 4, 2, 10, 10, 10, 10);
-  m_sprite.setTexture(m_tex);
+  m_map = Atlas::createTestMap();
+  auto uvs = *Helper::getTileRects(m_map.tile_width, m_map.tile_height, m_map.tilesets[0].cols, m_map.tilesets[0].rows, m_map.tilesets[0].margin, m_map.tilesets[0].spacing);
+
+  // for (int i = 0, max = m_map.width * m_map.height; i < max; ++i) {
+    // m_sprites.push_back(
+        // sf::Sprite(
+          // m_map.tilesets[0].src,
+          // uvs[m_map.layers[0].data[i] - m_map.tilesets[0].firstgid])
+      // );
+    // m_sprites[i].setPosition((i % m_map.height) * m_map.tile_height, (i / m_map.width) * m_map.tile_width);
+  // }
 }
 
 bool TempState::update([[maybe_unused]] float t_dt) {
@@ -13,10 +21,8 @@ bool TempState::update([[maybe_unused]] float t_dt) {
 }
 
 void TempState::render(std::shared_ptr<Engine::Window> t_window) {
-  for (int i = 0; i < tilesPerCol * tilesPerRow; ++i) {
-      m_sprite.setTextureRect(m_uvs[0]);
-      m_sprite.setPosition((i % tilesPerCol) * Engine::TileSize, (i / tilesPerRow) * Engine::TileSize);
-      t_window->draw(m_sprite);
+  for (auto& sprite : m_sprites) {
+    t_window->draw(sprite);
   }
 }
 
@@ -29,3 +35,15 @@ void TempState::enter(void) {
 
 void TempState::exit(void) {
 }
+
+// sf::Vector2i TempState::pixToTile(int x, int y, const int tileSize, const int left, const int top, const int map_width_px, const int map_height_px) {
+  // x = std::max<int>(left, x);
+  // y = std::min<int>(top, y);
+  // x = std::min<int>(left + (map_width_px * tileSize) - 1, x);
+  // y = std::max<int>(top - (map_height_px * tileSize) + 1, y);
+
+  // const int tileX = floor((x - left) / tileSize);
+  // const int tileY = floor((top - y) / tileSize);
+
+  // return sf::Vector2i(tileX, tileY);
+// }

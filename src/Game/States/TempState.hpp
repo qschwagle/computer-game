@@ -1,5 +1,8 @@
 #pragma once
 
+#include <memory>
+#include <algorithm>
+
 #include <SFML/Graphics.hpp>
 #include <math.h>
 
@@ -9,6 +12,8 @@
 #include "Window.hpp"
 #include "Application.hpp"
 #include "Helper.hpp"
+#include "Atlas.hpp"
+#include "Maps/TestMap.hpp"
 
 
 class TempState : public Engine::IState {
@@ -27,17 +32,7 @@ class TempState : public Engine::IState {
     void exit(void) override;
 
   protected:
-    sf::Sprite m_sprite;
-    sf::Texture m_tex;
-    std::vector<sf::IntRect> m_uvs;
-
-    int tilesPerRow = ceil(Engine::NativeWidth / Engine::TileSize);
-    int tilesPerCol = ceil(Engine::NativeHeight / Engine::TileSize);
-
-    // std::vector<unsigned int> m_map{
-      // 1,1,1,1,
-      // 1,2,2,1,
-      // 1,1,2,1,
-      // 1,1,1,1,
-    // };
+    std::vector<sf::Sprite> m_sprites;
+    Atlas::Atlas m_map;
+    // sf::Vector2i pixToTile(int x, int y, const int tilesize, const int left, const int top, const int map_width_px, const int map_height_px);
 };

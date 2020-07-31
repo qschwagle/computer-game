@@ -1,5 +1,11 @@
 #include "Application.hpp"
 
+Application::~Application() {
+  // std::cout << "stack " << m_stack.use_count() << std::endl;
+  // std::cout << "window " << m_window.use_count() << std::endl;
+  // std::cout << "Application::~Application()" << std::endl;
+}
+
 Application& Application::instance(void) {
   // std::cout << "Application::instance()" << std::endl;
   static Application m_instance;

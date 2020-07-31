@@ -7,7 +7,9 @@ game_sources = [
 game_headers = [
   'Application.hpp',
   'Helper.hpp',
-  'States/TempState.hpp'
+  'Atlas.hpp',
+  'States/TempState.hpp',
+  'Maps/TestMap.hpp',
 ]
 
 game_deps = [
