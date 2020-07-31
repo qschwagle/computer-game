@@ -3,6 +3,16 @@
 #include "nlohmann/json.hpp"
 #include "Helper.hpp"
 
+/**
+ * When trying to create a new Atlas, remember that the following
+ * fields are absent or need to be modified:
+ * - id
+ * - name
+ * - cansave
+ * - tileset.source -> Changed to json from xml
+ *
+ * Failure to do this will result in nlohmann::json parse/type errors
+ */
 namespace Atlas {
   using json = nlohmann::json;
 
