@@ -11,11 +11,11 @@ class Application;
 
 class Helper {
 public:
-  static sf::Texture& getTexture(int t_id);
+  static std::shared_ptr<sf::Texture> getTexture(std::string t_key);
 
   static std::unique_ptr<nlohmann::json> loadJson(std::string t_file_path);
 
-  static std::shared_ptr<std::vector<sf::IntRect>> getTileRects(
+  static std::vector<sf::IntRect> getTileRects(
       const uint t_tile_width,
       const uint t_tile_height,
       const uint t_cols,

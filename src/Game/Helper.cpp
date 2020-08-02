@@ -1,9 +1,11 @@
 #include "Application.hpp"
 #include "Helper.hpp"
 
-sf::Texture& Helper::getTexture(int t_id) {
+std::shared_ptr<sf::Texture> Helper::getTexture(std::string t_key) {
   // std::cout << "Helper::getTexture()" << std::endl;
-  return *(Application::instance().m_textures[t_id]);
+  auto textures = Application::instance().m_textures;
+  auto tex = textures.find(t_key);
+  return tex != textures.end() ? tex->second : nullptr;
 }
 
 std::unique_ptr<nlohmann::json> Helper::loadJson(std::string t_file_path) {
@@ -23,14 +25,14 @@ std::unique_ptr<nlohmann::json> Helper::loadJson(std::string t_file_path) {
   return nullptr;
 }
 
-std::shared_ptr<std::vector<sf::IntRect>> Helper::getTileRects(
+std::vector<sf::IntRect> Helper::getTileRects(
     const uint t_tile_width,
     const uint t_tile_height,
     const uint t_cols,
     const uint t_rows,
     const uint t_margin = 0,
     const uint t_spacing = 0) {
-  std::shared_ptr<std::vector<sf::IntRect>> rects = std::make_shared<std::vector<sf::IntRect>>();
+  std::vector<sf::IntRect> rects;
 
   int x, y;
 
@@ -41,7 +43,7 @@ std::shared_ptr<std::vector<sf::IntRect>> Helper::getTileRects(
       x = t_margin + i * (t_tile_width + t_spacing);
       y = t_margin + j * (t_tile_height + t_spacing);
 
-      rects->push_back(sf::IntRect(x, y, t_tile_width, t_tile_height));
+      rects.push_back(sf::IntRect(x, y, t_tile_width, t_tile_height));
       // std::cout << "k: " << ++k << " " << x << " " << y << " " << std::endl;
     }
 

@@ -30,7 +30,7 @@ class Application : public Traits::NoCopy, public Traits::NoMove {
      * @brief Hashmap of all the textures in the game
      *
      */
-    std::unordered_map<int, std::shared_ptr<sf::Texture>> m_textures;
+    std::unordered_map<std::string, std::shared_ptr<sf::Texture>> m_textures;
 
     void processArguments(int argc, const char **argv);
     int run(void);

@@ -20,7 +20,7 @@ namespace Engine {
        * @brief Deconstruct the StateStack object
        *
        */
-      ~StateStack() = default;
+      ~StateStack();
 
       /**
        * @brief Puts a state on top of the stack and runs enter

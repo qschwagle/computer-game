@@ -1,9 +1,13 @@
 #include "Application.hpp"
 
 Application::~Application() {
-  // std::cout << "stack " << m_stack.use_count() << std::endl;
-  // std::cout << "window " << m_window.use_count() << std::endl;
   // std::cout << "Application::~Application()" << std::endl;
+  // std::cout << "stack " << m_stack.use_count() << std::endl;
+  // for(auto it = m_textures.begin(); it != m_textures.end(); ++it) {
+    // it->second.reset();
+  // }
+  // m_window.reset();
+  // m_stack.reset();
 }
 
 Application& Application::instance(void) {
@@ -81,11 +85,11 @@ void Application::loop() {
 
 void Application::loadTextures() {
   // std::cout << "Application::loadTextures()" << std::endl;
-  int i = 0;
-  for (auto& el: m_manifest["textures"].items()) {
+  for (auto& el: m_manifest["textures"]) {
+    // std::cout << el <<  ": " << ((std::string)el).substr(((std::string)el).find_last_of("/\\") + 1) << std::endl;
     auto texture = std::make_shared<sf::Texture>();
-    texture->loadFromFile(el.value());
+    texture->loadFromFile(el);
 
-    m_textures[i++] = texture;
+    m_textures[((std::string)el).substr(((std::string)el).find_last_of("/\\") + 1)] = texture;
   }
 }

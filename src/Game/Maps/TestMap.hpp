@@ -4,7 +4,7 @@
 
 namespace Atlas {
   inline Atlas createTestMap() {
-    std::cout << "Creating Test Map" << std::endl;
+    // std::cout << "Creating Test Map" << std::endl;
     // Create atlas
     Atlas a = loadAtlas("assets/tiled/test.json");
 

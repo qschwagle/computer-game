@@ -4,16 +4,26 @@
 TempState::TempState(std::shared_ptr<Engine::StateStack> t_stack) {
   m_stack = t_stack;
   m_map = Atlas::createTestMap();
-  auto uvs = *Helper::getTileRects(m_map.tile_width, m_map.tile_height, m_map.tilesets[0].cols, m_map.tilesets[0].rows, m_map.tilesets[0].margin, m_map.tilesets[0].spacing);
+  int totalTilesets = m_map.tilesets.size();
 
-  // for (int i = 0, max = m_map.width * m_map.height; i < max; ++i) {
-    // m_sprites.push_back(
-        // sf::Sprite(
-          // m_map.tilesets[0].src,
-          // uvs[m_map.layers[0].data[i] - m_map.tilesets[0].firstgid])
-      // );
-    // m_sprites[i].setPosition((i % m_map.height) * m_map.tile_height, (i / m_map.width) * m_map.tile_width);
-  // }
+  for (int i = 0, max = m_map.width * m_map.height; i < max; ++i) {
+    auto tileId = m_map.layers[0].data[i];
+
+    auto tileset = m_map.tilesets[0];
+    if ( totalTilesets > 1) {
+      for(int n = 1; n < totalTilesets; ++n)  {
+        if (m_map.tilesets[n].firstgid > tileId) {
+          break;
+        }
+        tileset = m_map.tilesets[n];
+      }
+    }
+
+    m_sprites.push_back(
+      sf::Sprite(*Helper::getTexture(tileset.src), tileset.uvs[m_map.layers[0].data[i] - tileset.firstgid])
+    );
+    m_sprites[i].setPosition((i % m_map.height) * m_map.tile_height, (i / m_map.width) * m_map.tile_width);
+  }
 }
 
 bool TempState::update([[maybe_unused]] float t_dt) {

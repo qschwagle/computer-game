@@ -20,5 +20,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] const char **argv)
   delete app;
   app = nullptr;
 
+  std::cout << "Bye!" << std::endl;
+
   std::exit(exitCode);
 }

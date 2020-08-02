@@ -3,3 +3,4 @@ assets/*
 
 subprojects/*
 !subprojects/*.wrap
+*.pdf

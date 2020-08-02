@@ -25,6 +25,7 @@ namespace Atlas {
     uint margin;
     uint spacing;
     std::string src;
+    std::vector<sf::IntRect> uvs;
   };
 
   struct Layer {
@@ -72,7 +73,8 @@ namespace Atlas {
           t2["tileheight"],
           t2["margin"],
           t2["spacing"],
-          json_path.substr(0, json_path.find_last_of("/\\") + 1) + (std::string)t2["image"]
+          ((std::string)t2["image"]).substr(((std::string)t2["image"]).find_last_of("/\\") + 1),
+          Helper::getTileRects(t2["tilewidth"], t2["tileheight"], t2["columns"], t2["rows"], t2["margin"], t2["spacing"])
         }
       );
     }
