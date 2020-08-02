@@ -51,3 +51,11 @@ std::vector<sf::IntRect> Helper::getTileRects(
 
   return rects;
 }
+
+std::string Helper::stripPath(std::string t_s)  {
+  return t_s.substr(t_s.find_last_of("/\\") + 1);
+}
+
+std::string Helper::stripFile(std::string t_s) {
+  return t_s.substr(0, t_s.find_last_of("/\\") + 1);
+}

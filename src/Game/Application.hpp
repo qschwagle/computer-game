@@ -18,8 +18,6 @@ using json = nlohmann::json;
 
 class Application : public Traits::NoCopy, public Traits::NoMove {
   public:
-    ~Application();
-
     /**
      * @brief Gets the instance of the application, if it doesn't exist instanciates it
      *

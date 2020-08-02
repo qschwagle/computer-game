@@ -62,7 +62,7 @@ namespace Atlas {
 
 
     for (auto& t1 : j["tilesets"]){
-      auto t2 = *Helper::loadJson(json_path.substr(0, json_path.find_last_of("/\\") + 1) + (std::string)t1["source"]);
+      auto t2 = *Helper::loadJson(Helper::stripFile(json_path) + (std::string)t1["source"]);
 
       a.tilesets.push_back(
         Tileset {
@@ -73,7 +73,7 @@ namespace Atlas {
           t2["tileheight"],
           t2["margin"],
           t2["spacing"],
-          ((std::string)t2["image"]).substr(((std::string)t2["image"]).find_last_of("/\\") + 1),
+          Helper::stripPath((std::string)t2["image"]),
           Helper::getTileRects(t2["tilewidth"], t2["tileheight"], t2["columns"], t2["rows"], t2["margin"], t2["spacing"])
         }
       );

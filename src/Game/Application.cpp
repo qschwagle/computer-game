@@ -1,15 +1,5 @@
 #include "Application.hpp"
 
-Application::~Application() {
-  // std::cout << "Application::~Application()" << std::endl;
-  // std::cout << "stack " << m_stack.use_count() << std::endl;
-  // for(auto it = m_textures.begin(); it != m_textures.end(); ++it) {
-    // it->second.reset();
-  // }
-  // m_window.reset();
-  // m_stack.reset();
-}
-
 Application& Application::instance(void) {
   // std::cout << "Application::instance()" << std::endl;
   static Application m_instance;
@@ -86,10 +76,10 @@ void Application::loop() {
 void Application::loadTextures() {
   // std::cout << "Application::loadTextures()" << std::endl;
   for (auto& el: m_manifest["textures"]) {
-    // std::cout << el <<  ": " << ((std::string)el).substr(((std::string)el).find_last_of("/\\") + 1) << std::endl;
+    // std::cout << el <<  ": " << Helper::stripPath((std::string)el) << std::endl;
     auto texture = std::make_shared<sf::Texture>();
     texture->loadFromFile(el);
 
-    m_textures[((std::string)el).substr(((std::string)el).find_last_of("/\\") + 1)] = texture;
+    m_textures[Helper::stripPath((std::string)el)] = texture;
   }
 }

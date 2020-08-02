@@ -1,13 +1,6 @@
 #include "IState.hpp"
 #include "StateStack.hpp"
 
-Engine::StateStack::~StateStack() {
-  std::cout << "Engine::~StateStack()" << std::endl;
-  for (auto i_state = m_states.begin(); i_state != m_states.end(); ++i_state) {
-    i_state->reset();
-  }
-}
-
 void Engine::StateStack::push(std::shared_ptr<Engine::IState> t_state) {
   m_states.push_back(t_state);
   t_state->enter();

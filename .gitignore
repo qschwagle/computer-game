@@ -1,6 +1,10 @@
 bin/*
 assets/*
+!assets/manifest.json
 
 subprojects/*
 !subprojects/*.wrap
 *.pdf
+*.png
+*.jpg
+*.ps

@@ -17,12 +17,6 @@ namespace Engine {
       StateStack(void) = default;
 
       /**
-       * @brief Deconstruct the StateStack object
-       *
-       */
-      ~StateStack();
-
-      /**
        * @brief Puts a state on top of the stack and runs enter
        *
        */

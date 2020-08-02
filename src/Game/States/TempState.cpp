@@ -8,6 +8,10 @@ TempState::TempState(std::shared_ptr<Engine::StateStack> t_stack) {
 
   for (int i = 0, max = m_map.width * m_map.height; i < max; ++i) {
     auto tileId = m_map.layers[0].data[i];
+    if (tileId == 0) {
+      m_sprites.push_back(sf::Sprite());
+      continue;
+    }
 
     auto tileset = m_map.tilesets[0];
     if ( totalTilesets > 1) {

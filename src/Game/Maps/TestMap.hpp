@@ -6,7 +6,7 @@ namespace Atlas {
   inline Atlas createTestMap() {
     // std::cout << "Creating Test Map" << std::endl;
     // Create atlas
-    Atlas a = loadAtlas("assets/tiled/test.json");
+    Atlas a = loadAtlas("assets/tiled/test_bigger.json");
 
     // Save function ptrs to atlas
 
