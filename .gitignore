@@ -1,6 +1,6 @@
 bin/*
 assets/*
-!assets/manifest.json
+!assets/*.json
 
 subprojects/*
 !subprojects/*.wrap
