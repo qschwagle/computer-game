@@ -32,7 +32,8 @@ class TempState : public Engine::IState {
     void exit(void) override;
 
   protected:
-    std::vector<sf::Sprite> m_sprites;
+    // std::vector<sf::Sprite> m_sprites;
+    std::unordered_map<int, sf::Sprite> m_sprites;
     Atlas::Atlas m_map;
-    // sf::Vector2i pixToTile(int x, int y, const int tilesize, const int left, const int top, const int map_width_px, const int map_height_px);
+    sf::Vector2i pixToTile(int x, int y, const int tilesize, const int right_offset, const int top_offset, const int map_width_tile, const int map_height_tile);
 };
