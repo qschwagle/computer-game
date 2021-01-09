@@ -1,0 +1,8 @@
+/home/rail/code/cpp/computerGame/build/CMakeFiles/rebuild_cache.dir
+/home/rail/code/cpp/computerGame/build/CMakeFiles/edit_cache.dir
+/home/rail/code/cpp/computerGame/build/src/CMakeFiles/rebuild_cache.dir
+/home/rail/code/cpp/computerGame/build/src/CMakeFiles/edit_cache.dir
+/home/rail/code/cpp/computerGame/build/src/CMakeFiles/ComputerGame.dir
+/home/rail/code/cpp/computerGame/build/src/Traits/CMakeFiles/rebuild_cache.dir
+/home/rail/code/cpp/computerGame/build/src/Traits/CMakeFiles/edit_cache.dir
+/home/rail/code/cpp/computerGame/build/src/Traits/CMakeFiles/traits.dir

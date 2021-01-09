@@ -83,3 +83,10 @@ void Application::loadTextures() {
     m_textures[Helper::stripPath((std::string)el)] = texture;
   }
 }
+
+std::shared_ptr<sf::Texture> Application::getTexture(std::string t_key) {
+  // std::cout << "Helper::getTexture()" << std::endl;
+  auto textures = Application::instance().m_textures;
+  auto tex = textures.find(t_key);
+  return tex != textures.end() ? tex->second : nullptr;
+}
