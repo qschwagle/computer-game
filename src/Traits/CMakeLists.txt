@@ -5,6 +5,6 @@ add_library(traits
   Helper.cpp
 )
 
-# target_include_directories(traits PUBLIC "${PROJECT_SOURCE_DIR}/dir
+target_include_directories(traits PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/..")
 
 target_link_libraries(traits nlohmann_json::nlohmann_json ${SFML_LIBRARIES})

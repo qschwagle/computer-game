@@ -3,7 +3,7 @@
 #include "nlohmann/json.hpp"
 #include <SFML/Graphics.hpp>
 
-#include <Helper.hpp>
+#include <Traits/Helper.hpp>
 
 /**
  * When trying to create a new Atlas, remember that the following

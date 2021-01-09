@@ -1,5 +1,5 @@
 add_subdirectory(Traits)
-# add_subdirectory(Engine)
+add_subdirectory(Engine)
 # add_subdirectory(Game)
 
 set(SOURCE test.cpp)
