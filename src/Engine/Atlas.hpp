@@ -1,7 +1,9 @@
 #pragma once
 
 #include "nlohmann/json.hpp"
-#include "Helper.hpp"
+#include <SFML/Graphics.hpp>
+
+#include <Traits/Helper.hpp>
 
 /**
  * When trying to create a new Atlas, remember that the following
@@ -13,7 +15,7 @@
  *
  * Failure to do this will result in nlohmann::json parse/type errors
  */
-namespace Atlas {
+namespace Engine {
   using json = nlohmann::json;
 
   struct Tileset {

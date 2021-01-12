@@ -1,12 +1,4 @@
-#include "Application.hpp"
 #include "Helper.hpp"
-
-std::shared_ptr<sf::Texture> Helper::getTexture(std::string t_key) {
-  // std::cout << "Helper::getTexture()" << std::endl;
-  auto textures = Application::instance().m_textures;
-  auto tex = textures.find(t_key);
-  return tex != textures.end() ? tex->second : nullptr;
-}
 
 std::unique_ptr<nlohmann::json> Helper::loadJson(std::string t_file_path) {
   // std::cout << "Helper::loadJson()" << std::endl;

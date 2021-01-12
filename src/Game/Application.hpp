@@ -5,13 +5,14 @@
 #include <memory>
 
 #include "nlohmann/json.hpp"
+#include <SFML/Graphics.hpp>
 
-#include "Constant.hpp"
-#include "Window.hpp"
+#include <Traits/Constant.hpp>
+#include <Traits/NoCopy.hpp>
+#include <Traits/NoMove.hpp>
+#include <Engine/Window.hpp>
+
 #include "StateStack.hpp"
-#include "NoCopy.hpp"
-#include "NoMove.hpp"
-
 #include "States/TempState.hpp"
 
 using json = nlohmann::json;
@@ -68,4 +69,6 @@ class Application : public Traits::NoCopy, public Traits::NoMove {
      *
      */
     void loadTextures();
+
+    std::shared_ptr<sf::Texture> getTexture(std::string t_key);
 };
