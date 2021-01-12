@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#include <Traits/Constant.hpp>
+#include "Traits/Constant.hpp"
 
 int main() {
     std::cout << Engine::NativeHeight << std::endl;
