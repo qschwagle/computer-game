@@ -1,9 +1,8 @@
+build/*
 bin/*
 assets/*
 !assets/*.json
 
-subprojects/*
-!subprojects/*.wrap
 *.pdf
 *.png
 *.jpg

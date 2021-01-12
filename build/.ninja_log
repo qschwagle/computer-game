@@ -1,5 +1,0 @@
-# ninja log v5
-1	52	1610182146363007595	src/ComputerGame	7e0f34dc86969ce1
-1	1541	1610178471431703800	src/Traits/CMakeFiles/traits.dir/Helper.cpp.o	df14ff596fd4f769
-1	374	1610182087880069738	src/CMakeFiles/ComputerGame.dir/test.cpp.o	fb2bc4d154d64bee
-0	66	1610178622384693275	src/Traits/libtraits.a	a0be67f2acefe3fa
