@@ -16,4 +16,4 @@ add_library(engine
 
 target_include_directories(engine PUBLIC "${CMAKE_SOURCE_DIR}/src")
 
-target_link_libraries(engine traits nlohmann_json::nlohmann_json ${SFML_LIBRARIES})
+target_link_libraries(engine traits nlohmann_json::nlohmann_json ${SFML_LIBRARIES} ${Boost_LIBRARIES})

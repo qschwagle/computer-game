@@ -6,6 +6,6 @@ add_library(game
   States/TempState.cpp
 )
 
-# target_include_directories(game PRIVATE "..")
+target_include_directories(engine PUBLIC "${CMAKE_SOURCE_DIR}/src")
 
-target_link_libraries(game SHARED traits engine nlohmann_json::nlohmann_json ${SFML_LIBRARIES})
+target_link_libraries(game traits engine nlohmann_json::nlohmann_json ${SFML_LIBRARIES} ${Boost_LIBRARIES})

@@ -8,5 +8,4 @@ add_executable(${PROJECT_NAME} ${SOURCE})
 # Flags
 target_compile_options(${PROJECT_NAME} PRIVATE ${flags})
 
-# target_link_libraries(${PROJECT_NAME} traits engine ${SFML_LIBRARIES})
-target_link_libraries(${PROJECT_NAME} traits ${SFML_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} traits ${SFML_LIBRARIES} ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
