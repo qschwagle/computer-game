@@ -11,7 +11,6 @@ message("C++ compiler flags: ${CMAKE_CXX_FLAGS}")
 
 # Libraries
 SET_PROPERTY(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
-find_package(nlohmann_json 3.2.0 REQUIRED)
 
 find_package(SFML 2.5 REQUIRED COMPONENTS system window graphics)
 set(SFML_LIBRARIES sfml-system sfml-window sfml-graphics)

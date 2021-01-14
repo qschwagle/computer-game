@@ -6,7 +6,7 @@ namespace Atlas {
   inline Engine::Atlas createTestMap() {
     // std::cout << "Creating Test Map" << std::endl;
     // Create atlas
-    Engine::Atlas a = Engine::loadAtlas("assets/tiled/test_bigger.json");
+    Engine::Atlas a = Engine::loadAtlas("assets/tiled/test_bigger");
 
     // Save function ptrs to atlas
 

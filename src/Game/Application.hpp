@@ -1,10 +1,13 @@
 #pragma once
 
-#include <map>
+#include <unordered_map>
 #include <iostream>
 #include <memory>
+#include <fstream>
+#include <sstream>
+#include <string>
 
-#include "nlohmann/json.hpp"
+
 #include <SFML/Graphics.hpp>
 #include <boost/log/trivial.hpp>
 
@@ -15,8 +18,6 @@
 #include "Engine/Window.hpp"
 #include "Engine/StateStack.hpp"
 #include "States/TempState.hpp"
-
-using json = nlohmann::json;
 
 class Application : public Traits::NoCopy, public Traits::NoMove {
   public:
@@ -39,7 +40,6 @@ class Application : public Traits::NoCopy, public Traits::NoMove {
     sf::Event m_event;
     sf::Clock m_clock;
     sf::Time m_frame_time;
-    json m_manifest;
 
     /**
      * @brief Associated window

@@ -14,9 +14,6 @@ void Application::processArguments([[maybe_unused]] int argc, [[maybe_unused]] c
 void Application::init() {
   BOOST_LOG_TRIVIAL(trace) << "Application::init()";
 
-  // Load configs & manifest
-  m_manifest = *Helper::loadJson("assets/manifest.json");
-
   // Create window
   m_window = std::make_shared<Engine::Window>();
   m_frame_time = sf::seconds(1.0 / m_window->getFps());
@@ -76,17 +73,31 @@ void Application::loop() {
 }
 
 void Application::loadTextures() {
-  // std::cout << "Application::loadTextures()" << std::endl;
-  for (auto& el: m_manifest["textures"]) {
-    // std::cout << el <<  ": " << Helper::stripPath((std::string)el) << std::endl;
-    auto texture = std::make_shared<sf::Texture>();
-    texture->loadFromFile(el);
+  BOOST_LOG_TRIVIAL(trace) << "Application::loadTextures()";
 
-    m_textures[Helper::stripPath((std::string)el)] = texture;
+  std::ifstream manifest;
+  manifest.open("assets/manifests/textures.manifest");
+
+  if (manifest.is_open()) {
+    std::string line;
+    while (std::getline(manifest, line)) {
+
+      std::istringstream iss(line);
+      std::string key, filePath;
+      iss >> key >> filePath;
+
+      BOOST_LOG_TRIVIAL(trace) << "Loaded texture \"" << filePath <<"\" -> " << key;
+
+      auto texture = std::make_shared<sf::Texture>();
+      texture->loadFromFile(filePath);
+
+      m_textures[key] = texture;
+    }
   }
 }
 
 std::shared_ptr<sf::Texture> Application::getTexture(std::string t_key) {
+  BOOST_LOG_TRIVIAL(trace) << "Application::getTexture(" << t_key << ")";
   // std::cout << "Helper::getTexture()" << std::endl;
   auto textures = Application::instance().m_textures;
   auto tex = textures.find(t_key);

@@ -1,22 +1,5 @@
 #include "Helper.hpp"
 
-std::unique_ptr<nlohmann::json> Helper::loadJson(std::string t_file_path) {
-  // std::cout << "Helper::loadJson()" << std::endl;
-  if(!t_file_path.empty()) {
-    std::ifstream json_file = std::ifstream(t_file_path);
-    if (!json_file.fail()) {
-      nlohmann::json output;
-      json_file >> output;
-      return std::make_unique<nlohmann::json>(output);
-    } else {
-      std::cerr << "Json could not find file\"" << t_file_path << "\"" << std::endl;
-    }
-  } else {
-    std::cerr << "Empty json file path. Please specify a valid json file." << std::endl;
-  }
-  return nullptr;
-}
-
 std::vector<sf::IntRect> Helper::getTileRects(
     const uint t_tile_width,
     const uint t_tile_height,

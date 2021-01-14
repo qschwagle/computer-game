@@ -8,4 +8,4 @@ add_library(game
 
 target_include_directories(engine PUBLIC "${CMAKE_SOURCE_DIR}/src")
 
-target_link_libraries(game traits engine nlohmann_json::nlohmann_json ${SFML_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(game traits engine ${SFML_LIBRARIES} ${Boost_LIBRARIES})

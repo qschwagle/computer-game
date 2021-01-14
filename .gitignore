@@ -1,7 +1,7 @@
 build/*
 bin/*
 assets/*
-!assets/*.json
+!assets/manifests/*
 
 *.pdf
 *.png

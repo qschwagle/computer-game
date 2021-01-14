@@ -4,11 +4,8 @@
 #include <fstream>
 #include <string>
 #include <iostream>
-#include "nlohmann/json.hpp"
 
 namespace Helper {
-
-  std::unique_ptr<nlohmann::json> loadJson(std::string t_file_path);
 
   std::vector<sf::IntRect> getTileRects(
       const unsigned int t_tile_width,
