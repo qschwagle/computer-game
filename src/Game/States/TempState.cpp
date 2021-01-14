@@ -1,5 +1,5 @@
 #include "TempState.hpp"
-#include "Application.hpp"
+#include "Game/Application.hpp"
 
 TempState::TempState([[maybe_unused]] std::shared_ptr<Engine::StateStack> t_stack) {
   // m_stack = t_stack;
@@ -30,16 +30,17 @@ TempState::TempState([[maybe_unused]] std::shared_ptr<Engine::StateStack> t_stac
 
   // auto topLeftTile = pixToTile(0, 0, Engine::TileSize, 0, 0, m_map.width, m_map.height);
   // auto bottomRightTile = pixToTile(Engine::NativeWidth, Engine::NativeHeight, Engine::TileSize, 0, 0, m_map.width, m_map.height);
+  BOOST_LOG_TRIVIAL(trace) << "TempState::TempState()";
 }
 
 bool TempState::update([[maybe_unused]] float t_dt) {
   return true;
 }
 
-void TempState::render(std::shared_ptr<Engine::Window> t_window) {
-  for (auto& it : m_sprites) {
-    t_window->draw(it.second);
-  }
+void TempState::render([[maybe_unused]] std::shared_ptr<Engine::Window> t_window) {
+  // for (auto& it : m_sprites) {
+    // t_window->draw(it.second);
+  // }
 }
 
 void TempState::handleInput([[maybe_unused]] sf::Event t_event) {

@@ -6,13 +6,14 @@
 
 #include "nlohmann/json.hpp"
 #include <SFML/Graphics.hpp>
+#include <boost/log/trivial.hpp>
 
-#include <Traits/Constant.hpp>
-#include <Traits/NoCopy.hpp>
-#include <Traits/NoMove.hpp>
-#include <Engine/Window.hpp>
+#include "Constant.hpp"
+#include "NoCopy.hpp"
+#include "NoMove.hpp"
 
-#include "StateStack.hpp"
+#include "Engine/Window.hpp"
+#include "Engine/StateStack.hpp"
 #include "States/TempState.hpp"
 
 using json = nlohmann::json;

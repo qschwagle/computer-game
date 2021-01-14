@@ -8,10 +8,12 @@ Application& Application::instance(void) {
 
 void Application::processArguments([[maybe_unused]] int argc, [[maybe_unused]] const char **argv) {
   // Might do stuff here later
+  BOOST_LOG_TRIVIAL(trace) << "Application::processArguments()";
 }
 
 void Application::init() {
-  // std::cout << "Application::init()" << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << "Application::init()";
+
   // Load configs & manifest
   m_manifest = *Helper::loadJson("assets/manifest.json");
 
@@ -41,7 +43,7 @@ int Application::run() {
 }
 
 void Application::loop() {
-  // std::cout << "Application::loop()" << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << "Application::loop()";
 
   sf::Time previous = m_clock.getElapsedTime();
   sf::Time lag = sf::Time::Zero;

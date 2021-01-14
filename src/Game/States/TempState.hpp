@@ -2,17 +2,16 @@
 
 #include <memory>
 #include <algorithm>
+#include <boost/log/trivial.hpp>
 
 #include <SFML/Graphics.hpp>
-// #include <math.h>
 
-#include "Game/StateStack.hpp"
-#include "Engine/Tween.hpp"
+#include "Engine/StateStack.hpp"
 #include "Engine/IState.hpp"
 #include "Engine/Window.hpp"
 #include "Game/Application.hpp"
-#include "Helper.hpp"
 #include "Engine/Atlas.hpp"
+#include "Helper.hpp"
 #include "Game/Maps/TestMap.hpp"
 
 

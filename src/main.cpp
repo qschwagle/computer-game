@@ -1,7 +1,7 @@
 #include <memory>
 #include <cassert>
 
-#include "Engine/Constant.hpp"
+#include "Constant.hpp"
 #include "Game/Application.hpp"
 
 int main([[maybe_unused]] int argc, [[maybe_unused]] const char **argv)

@@ -7,9 +7,9 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Traits/Constant.hpp"
-#include "Traits/NoCopy.hpp"
-#include "Traits/NoMove.hpp"
+#include "Constant.hpp"
+#include "NoCopy.hpp"
+#include "NoMove.hpp"
 
 namespace Engine {
   /**
