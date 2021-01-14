@@ -7,3 +7,59 @@ assets/*
 *.png
 *.jpg
 *.ps
+.vs/CMake Overview
+.vs/cmake.db
+.vs/computer-game/v16/.suo
+.vs/computer-game/v16/Browse.VC.db
+.vs/computer-game/v16/Browse.VC.db-shm
+.vs/computer-game/v16/Browse.VC.db-wal
+.vs/computer-game/v16/Browse.VC.opendb
+.vs/ProjectSettings.json
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
+.vscode/c_cpp_properties.json
+out/build/x64-Debug (default)/.cmake/api/v1/query/client-MicrosoftVS/query.json
+out/build/x64-Debug (default)/CMakeCache.txt
+out/build/x64-Debug (default)/CMakeFiles/3.17.20032601-MSVC_2/CMakeCXXCompiler.cmake
+out/build/x64-Debug (default)/CMakeFiles/3.17.20032601-MSVC_2/CMakeDetermineCompilerABI_CXX.bin
+out/build/x64-Debug (default)/CMakeFiles/3.17.20032601-MSVC_2/CMakeRCCompiler.cmake
+out/build/x64-Debug (default)/CMakeFiles/3.17.20032601-MSVC_2/CMakeSystem.cmake
+out/build/x64-Debug (default)/CMakeFiles/3.17.20032601-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.cpp
+out/build/x64-Debug (default)/CMakeFiles/3.17.20032601-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.exe
+out/build/x64-Debug (default)/CMakeFiles/3.17.20032601-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.obj
+out/build/x64-Debug (default)/CMakeFiles/cmake.check_cache
+out/build/x64-Debug (default)/CMakeFiles/CMakeOutput.log
+out/build/x64-Debug (default)/CMakeFiles/ShowIncludes/foo.h
+out/build/x64-Debug (default)/CMakeFiles/ShowIncludes/main.c
+out/build/x64-Debug (default)/CMakeFiles/ShowIncludes/main.obj
+out/build/x64-Debug (default)/VSInheritEnvironments.txt
+out/build/x64-Debug/.cmake/api/v1/query/client-MicrosoftVS/query.json
+out/build/x64-Debug/CMakeCache.txt
+out/build/x64-Debug/CMakeFiles/3.17.20032601-MSVC_2/CMakeCXXCompiler.cmake
+out/build/x64-Debug/CMakeFiles/3.17.20032601-MSVC_2/CMakeDetermineCompilerABI_CXX.bin
+out/build/x64-Debug/CMakeFiles/3.17.20032601-MSVC_2/CMakeRCCompiler.cmake
+out/build/x64-Debug/CMakeFiles/3.17.20032601-MSVC_2/CMakeSystem.cmake
+out/build/x64-Debug/CMakeFiles/3.17.20032601-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.cpp
+out/build/x64-Debug/CMakeFiles/3.17.20032601-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.exe
+out/build/x64-Debug/CMakeFiles/3.17.20032601-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.obj
+out/build/x64-Debug/CMakeFiles/cmake.check_cache
+out/build/x64-Debug/CMakeFiles/CMakeOutput.log
+out/build/x64-Debug/CMakeFiles/ShowIncludes/foo.h
+out/build/x64-Debug/CMakeFiles/ShowIncludes/main.c
+out/build/x64-Debug/CMakeFiles/ShowIncludes/main.obj
+out/build/x64-Debug/VSInheritEnvironments.txt
+out/build/x64-Release/.cmake/api/v1/query/client-MicrosoftVS/query.json
+out/build/x64-Release/CMakeCache.txt
+out/build/x64-Release/CMakeFiles/3.17.20032601-MSVC_2/CMakeCXXCompiler.cmake
+out/build/x64-Release/CMakeFiles/3.17.20032601-MSVC_2/CMakeDetermineCompilerABI_CXX.bin
+out/build/x64-Release/CMakeFiles/3.17.20032601-MSVC_2/CMakeRCCompiler.cmake
+out/build/x64-Release/CMakeFiles/3.17.20032601-MSVC_2/CMakeSystem.cmake
+out/build/x64-Release/CMakeFiles/3.17.20032601-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.cpp
+out/build/x64-Release/CMakeFiles/3.17.20032601-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.exe
+out/build/x64-Release/CMakeFiles/3.17.20032601-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.obj
+out/build/x64-Release/CMakeFiles/cmake.check_cache
+out/build/x64-Release/CMakeFiles/CMakeOutput.log
+out/build/x64-Release/CMakeFiles/ShowIncludes/foo.h
+out/build/x64-Release/CMakeFiles/ShowIncludes/main.c
+out/build/x64-Release/CMakeFiles/ShowIncludes/main.obj
+out/build/x64-Release/VSInheritEnvironments.txt
