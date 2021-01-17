@@ -8,11 +8,11 @@ Application& Application::instance(void) {
 
 void Application::processArguments([[maybe_unused]] int argc, [[maybe_unused]] const char **argv) {
   // Might do stuff here later
-  BOOST_LOG_TRIVIAL(trace) << "Application::processArguments()";
+  // LOG_TRACE("Application::processArguments()");
 }
 
 void Application::init() {
-  BOOST_LOG_TRIVIAL(trace) << "Application::init()";
+  LOG_TRACE("Application::init()");
 
   // Create window
   m_window = std::make_shared<Engine::Window>();
@@ -41,7 +41,7 @@ int Application::run() {
 }
 
 void Application::loop() {
-  BOOST_LOG_TRIVIAL(trace) << "Application::loop()";
+  LOG_TRACE("Application::loop()");
 
   sf::Time previous = m_clock.getElapsedTime();
   sf::Time lag = sf::Time::Zero;
@@ -74,7 +74,7 @@ void Application::loop() {
 }
 
 void Application::loadTilesets() {
-  BOOST_LOG_TRIVIAL(trace) << "Application::loadTilesets()";
+ LOG_TRACE("Application::loadTilesets()");
 
   auto lines = Helper::getFileLines("assets/manifests/tilesets.manifest");
   for (auto it = lines.begin(); it < lines.end(); it++) {
@@ -83,14 +83,14 @@ void Application::loadTilesets() {
     // Instead of the manifest key, lets use what's in the tileset
     auto tileset = std::make_shared<Engine::Tileset>(Engine::Tileset(file_path));
 
-    BOOST_LOG_TRIVIAL(trace) << "Loaded tileset \"" << file_path <<"\" -> " << tileset->id;
+    LOG_INFO("Loaded tileset {} -> {}", file_path, tileset->id);
 
     m_tilesets[tileset->id] = tileset;
   }
 }
 
 void Application::loadTextures() {
-  BOOST_LOG_TRIVIAL(trace) << "Application::loadTextures()";
+  LOG_TRACE("Application::loadTextures()");
 
   auto lines = Helper::getFileLines("assets/manifests/textures.manifest");
   for (auto it = lines.begin(); it < lines.end(); it++) {
@@ -101,21 +101,21 @@ void Application::loadTextures() {
     auto texture = std::make_shared<sf::Texture>();
     texture->loadFromFile(file_path);
 
-    BOOST_LOG_TRIVIAL(trace) << "Loaded texture \"" << file_path <<"\" -> " << key;
+    LOG_INFO("Loaded texture: {} -> {}", file_path, key);
 
     m_textures[key] = texture;
   }
 }
 
 std::shared_ptr<sf::Texture> Application::getTexture(std::string t_key) {
-  BOOST_LOG_TRIVIAL(trace) << "Application::getTexture(" << t_key << ")";
+  LOG_TRACE("Application::getTexture({})", t_key);
 
   auto tex = m_textures.find(t_key);
   return tex != m_textures.end() ? tex->second : nullptr;
 }
 
 std::shared_ptr<Engine::Tileset> Application::getTileset(std::string t_key) {
-  BOOST_LOG_TRIVIAL(trace) << "Application::getTileset(" << t_key << ")";
+  LOG_TRACE("Application::getTileset({})", t_key);
 
   auto tileset = m_tilesets.find(t_key);
   return tileset != m_tilesets.end() ? tileset->second : nullptr;

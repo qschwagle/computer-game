@@ -1,9 +1,8 @@
 #include "Map.hpp"
 
 Engine::Map::Map(AssetProvider& t_asset_provider, std::shared_ptr<Engine::Atlas> t_atlas) {
-  BOOST_LOG_TRIVIAL(trace) << "Engine::Engine()";
+  LOG_TRACE("Engine::Engine()");
   m_atlas = t_atlas;
-  // m_textures =
   m_layer = t_atlas->layers[0];
   m_width = t_atlas->width;
   m_height = t_atlas->height;
@@ -28,7 +27,7 @@ Engine::Map::Map(AssetProvider& t_asset_provider, std::shared_ptr<Engine::Atlas>
       break;
     }
   }
-  BOOST_LOG_TRIVIAL(trace) << "Blocking tile is: " << m_blocking_tile;
+  LOG_INFO("Blocking tile is: {}", m_blocking_tile);
 }
 
 sf::Vector2i Engine::Map::pixelToTile(int t_x, int t_y) {

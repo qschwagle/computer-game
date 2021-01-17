@@ -4,8 +4,8 @@
 #include <unordered_map>
 #include <vector>
 #include <SFML/Graphics.hpp>
-#include <boost/log/trivial.hpp>
 
+#include "Log.hpp"
 #include "Constant.hpp"
 
 #include "Atlas.hpp"

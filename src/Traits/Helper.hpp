@@ -5,7 +5,8 @@
 #include <string>
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include <boost/log/trivial.hpp>
+
+#include "Log.hpp"
 
 namespace Helper {
 

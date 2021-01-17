@@ -5,9 +5,9 @@
 #include <sstream>
 #include <string>
 
-#include <boost/log/trivial.hpp>
 #include <SFML/Graphics.hpp>
 
+#include "Log.hpp"
 #include "Constant.hpp"
 #include "Helper.hpp"
 

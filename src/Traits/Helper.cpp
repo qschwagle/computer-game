@@ -11,7 +11,6 @@ std::vector<sf::IntRect> Helper::getTileRects(
 
   int x, y;
 
-  // int k = -1;
   for(uint j = 0; j < t_rows; ++j) {
     for(uint i = 0; i < t_cols; ++i) {
 
@@ -19,7 +18,6 @@ std::vector<sf::IntRect> Helper::getTileRects(
       y = t_margin + j * (t_tile_height + t_spacing);
 
       rects.push_back(sf::IntRect(x, y, t_tile_width, t_tile_height));
-      // std::cout << "k: " << ++k << " " << x << " " << y << " " << std::endl;
     }
 
   }
@@ -46,7 +44,7 @@ std::vector<std::string> Helper::getFileLines(const std::string t_file_path) {
     }
     file.close();
   } else {
-    BOOST_LOG_TRIVIAL(error) << "Unable to load file: " << t_file_path;
+    LOG_ERROR("Unable to load file: {}", t_file_path);
   }
 
   return file_vec;

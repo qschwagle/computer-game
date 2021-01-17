@@ -1,11 +1,11 @@
-#define BOOST_LOG_DYN_LINK 1
-
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include <boost/log/trivial.hpp>
+
+#include "Log.hpp"
 
 int main() {
-    BOOST_LOG_TRIVIAL(trace) << "Main Entered";
+    Log::init();
+
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
@@ -17,14 +17,16 @@ int main() {
         {
             if (event.type == sf::Event::Closed) {
                 window.close();
+            } else if (event.type == sf::Event::KeyReleased) {
+                LOG_TRACE("something something");
             }
+
         }
 
         window.clear();
         window.draw(shape);
         window.display();
     }
-
 
     return 0;
 }

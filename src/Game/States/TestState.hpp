@@ -6,6 +6,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Log.hpp"
 #include "Helper.hpp"
 
 #include "Engine/StateStack.hpp"

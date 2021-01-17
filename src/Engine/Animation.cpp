@@ -1,6 +1,6 @@
 #include "Animation.hpp"
 
-Engine::Animation::Animation(std::vector<int> t_frames = std::vector<int>{0}, bool t_loop = true, float t_spf = 0.12) {
+Engine::Animation::Animation(std::vector<int> t_frames, bool t_loop = true, float t_spf = 0.12) {
   m_loop = t_loop;
   m_spf = t_spf;
   m_frames = t_frames;

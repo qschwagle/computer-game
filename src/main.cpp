@@ -1,11 +1,14 @@
 #include <memory>
 #include <cassert>
 
+#include "Log.hpp"
 #include "Constant.hpp"
 #include "Game/Application.hpp"
 
 int main([[maybe_unused]] int argc, [[maybe_unused]] const char **argv)
 {
+  Log::init();
+
   int exitCode = Engine::NoError;
 
   Application* app = &Application::instance();

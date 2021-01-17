@@ -1,10 +1,10 @@
 #include "TestState.hpp"
 
 TestState::TestState([[maybe_unused]] std::shared_ptr<Engine::StateStack> t_stack) {
-  BOOST_LOG_TRIVIAL(trace) << "TestState::TestState()";
+  LOG_TRACE("TestState::TestState()");
 
   auto test = std::make_shared<Maps::TestMap>();
-  BOOST_LOG_TRIVIAL(debug) << "Did this load? " << test->id;
+  LOG_TRACE("Did this load? {}", test->id);
   // m_map = Engine::Map(Application::instance(), std::make_shared<Maps::TestMap>());
 }
 
