@@ -1,8 +1,0 @@
-map_id
-name of the map
-columns rows tile_width tile_height can_save
-tileset first_tile_id tileset_id
-layer name
-layer_data_background_section
-layer_data_detail_section
-layer_data_collision section

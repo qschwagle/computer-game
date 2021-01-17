@@ -1,5 +1,4 @@
-# tileset_id
-# texture_manifest_key
-# columns rows tile_height tile_width margin spacing
+# id: tileset_id
+# data: columns rows tile_height tile_width margin spacing
 id collision
-1 1 10 10 0 0
+data 1 1 10 10 0 0
