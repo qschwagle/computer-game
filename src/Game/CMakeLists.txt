@@ -1,7 +1,7 @@
 add_library(game
   Application.cpp
-  # Maps/TestMap.hpp
-  States/TempState.cpp
+  Maps/TestMap.hpp
+  States/TestState.cpp
 )
 
 target_include_directories(game PUBLIC "${CMAKE_SOURCE_DIR}/src")

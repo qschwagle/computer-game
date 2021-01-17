@@ -13,14 +13,12 @@
 #include "Engine/Window.hpp"
 #include "Engine/Map.hpp"
 
-#include "Game/Application.hpp"
-#include "Engine/Atlas.hpp"
 #include "Game/Maps/TestMap.hpp"
 
-class TempState : public Engine::IState {
+class TestState : public Engine::IState {
   public:
-    TempState(std::shared_ptr<Engine::StateStack> t_stack);
-    ~TempState(void) override = default;
+    TestState(std::shared_ptr<Engine::StateStack> t_stack);
+    ~TestState(void) override = default;
 
     bool update(float t_dt) override;
 
@@ -32,5 +30,5 @@ class TempState : public Engine::IState {
 
     void exit(void) override;
   // protected:
-    // Engine::Map m_map(Application::instance(), Engine::Atlas("assets/maps/test.map"));
+    // Engine::Map m_map;
 };

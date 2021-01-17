@@ -32,7 +32,7 @@ int Application::run() {
   init();
 
   // Throw our first state on the stack
-  m_stack->push(std::make_shared<TempState>(m_stack));
+  m_stack->push(std::make_shared<TestState>(m_stack));
 
   // Run loop
   loop();

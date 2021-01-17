@@ -1,10 +1,10 @@
 #pragma once
 
-//# include "Engine/Atlas.hpp"
-//# include "Game/Application.hpp"
+#include "Engine/Atlas.hpp"
 
-namespace Atlas {
-  // class TestMap : public Engine::Atlas {
-    // TestMap() : Engine::Atlas(Application::instance() "assets/maps/test.map") {};
-  // };
+namespace Maps {
+  class TestMap : public Engine::Atlas {
+    public:
+      TestMap() : Engine::Atlas("assets/maps/test.map") {};
+  };
 }

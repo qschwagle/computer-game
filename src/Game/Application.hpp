@@ -20,7 +20,7 @@
 #include "Engine/Atlas.hpp"
 #include "Engine/Window.hpp"
 #include "Engine/StateStack.hpp"
-#include "States/TempState.hpp"
+#include "States/TestState.hpp"
 
 class Application : public Traits::NoCopy, public Traits::NoMove, public Engine::AssetProvider {
   public:
