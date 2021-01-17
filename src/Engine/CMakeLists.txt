@@ -1,16 +1,11 @@
 add_library(engine
-    Animation.hpp
     Animation.cpp
-    Atlas.hpp
+    Atlas.cpp
     IState.hpp
-    Map.hpp
     Map.cpp
-    StateStack.hpp
     StateStack.cpp
-    Tween.hpp
     Tween.cpp
     Util.hpp
-    Window.hpp
     Window.cpp
 )
 

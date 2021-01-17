@@ -1,6 +1,6 @@
 #include "Map.hpp"
 
-Engine::Map::Map(Engine::Atlas t_atlas) {
+Engine::Map::Map(std::shared_ptr<Engine::Atlas> t_atlas) {
   m_map = t_atlas;
 }
 

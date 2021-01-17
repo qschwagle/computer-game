@@ -12,9 +12,11 @@
 #include <boost/log/trivial.hpp>
 
 #include "Constant.hpp"
+#include "Helper.hpp"
 #include "NoCopy.hpp"
 #include "NoMove.hpp"
 
+#include "Engine/Atlas.hpp"
 #include "Engine/Window.hpp"
 #include "Engine/StateStack.hpp"
 #include "States/TempState.hpp"
@@ -32,6 +34,8 @@ class Application : public Traits::NoCopy, public Traits::NoMove {
      *
      */
     std::unordered_map<std::string, std::shared_ptr<sf::Texture>> m_textures;
+
+    std::unordered_map<std::string, std::shared_ptr<Engine::Tileset>> m_tilesets;
 
     void processArguments(int argc, const char **argv);
     int run(void);
@@ -66,10 +70,17 @@ class Application : public Traits::NoCopy, public Traits::NoMove {
     void loop();
 
     /**
+     * @breif Load allt he tilesets and store them in a hasmap
+     *
+     */
+    void loadTilesets();
+
+    /**
      * @brief Load all the textures and store them in a hashmap because we're lazy af
      *
      */
     void loadTextures();
 
+    std::shared_ptr<Engine::Tileset> getTileset(std::string t_key);
     std::shared_ptr<sf::Texture> getTexture(std::string t_key);
 };

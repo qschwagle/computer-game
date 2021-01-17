@@ -1,0 +1,4 @@
+# id tileset_id
+# columns rows tile_height tile_width margin spacing
+id forest
+data 4 2 10 10 10 10

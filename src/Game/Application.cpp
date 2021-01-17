@@ -72,27 +72,37 @@ void Application::loop() {
   }
 }
 
+void Application::loadTilesets() {
+  BOOST_LOG_TRIVIAL(trace) << "Application::loadTilesets()";
+
+  auto lines = Helper::getFileLines("assets/manifests/tilesets.manifest");
+  for (auto iter = lines.begin(); iter < lines.end(); iter++) {
+    std::string file_path = *iter;
+
+    // Instead of the manifest key, lets use what's in the tileset
+    auto tileset = std::make_shared<Engine::Tileset>(Engine::Tileset(file_path));
+
+    BOOST_LOG_TRIVIAL(trace) << "Loaded tileset \"" << file_path <<"\" -> " << tileset->id;
+
+    m_tilesets[tileset->id] = tileset;
+  }
+}
+
 void Application::loadTextures() {
   BOOST_LOG_TRIVIAL(trace) << "Application::loadTextures()";
 
-  std::ifstream manifest;
-  manifest.open("assets/manifests/textures.manifest");
+  auto lines = Helper::getFileLines("assets/manifests/textures.manifest");
+  for (auto iter = lines.begin(); iter < lines.end(); iter++) {
+    std::istringstream iss(*iter);
+    std::string key, file_path;
+    iss >> key >> file_path;
 
-  if (manifest.is_open()) {
-    std::string line;
-    while (std::getline(manifest, line)) {
+    auto texture = std::make_shared<sf::Texture>();
+    texture->loadFromFile(file_path);
 
-      std::istringstream iss(line);
-      std::string key, filePath;
-      iss >> key >> filePath;
+    BOOST_LOG_TRIVIAL(trace) << "Loaded texture \"" << file_path <<"\" -> " << key;
 
-      BOOST_LOG_TRIVIAL(trace) << "Loaded texture \"" << filePath <<"\" -> " << key;
-
-      auto texture = std::make_shared<sf::Texture>();
-      texture->loadFromFile(filePath);
-
-      m_textures[key] = texture;
-    }
+    m_textures[key] = texture;
   }
 }
 

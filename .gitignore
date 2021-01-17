@@ -1,8 +1,9 @@
 build/*
 bin/*
-assets/*
-!assets/manifests/*
+assets/wee
+assets/tiled
 
+*.vim
 *.pdf
 *.png
 *.jpg

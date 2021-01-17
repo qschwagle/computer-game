@@ -1,9 +1,11 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <iostream>
+#include <SFML/Graphics.hpp>
+#include <boost/log/trivial.hpp>
 
 namespace Helper {
 
@@ -18,4 +20,6 @@ namespace Helper {
   std::string stripPath(std::string t_s);
 
   std::string stripFile(std::string t_s);
+
+  std::vector<std::string> getFileLines(const std::string t_file_path);
 }

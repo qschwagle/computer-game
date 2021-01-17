@@ -1,0 +1,18 @@
+# id: map_id
+# name: name of the map
+# data: columns rows tile_width tile_height can_save
+# tileset: first_tile_id tileset_manifest_key
+# layer: name
+# layer_data_background_section
+# layer_data_detail_section
+# layer_data_collision section
+id test_id
+name Test Map
+data 10 10 10 10 true
+tileset 1 forest
+tileset 9 collision
+layer base
+1 1 2 3 3 3 3 3 3 3 1 1 2 3 3 3 3 3 3 3 1 1 2 3 3 3 3 3 3 3 1 1 2 3 3 3 3 3 3 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+0 0 7 0 0 0 0 0 0 0 0 0 7 0 0 0 4 4 0 0 0 0 0 0 4 0 0 0 0 0 7 0 7 0 0 0 0 0 0 6 0 0 0 0 0 0 0 0 0 0 5 0 0 0 7 0 0 0 4 0 5 0 0 0 0 5 0 0 0 0 5 4 4 0 0 0 0 0 0 6 0 0 5 0 0 0 7 7 6 0 0 0 0 4 4 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
