@@ -40,9 +40,20 @@ class Application : public Traits::NoCopy, public Traits::NoMove, public Engine:
     std::unordered_map<std::string, std::shared_ptr<Engine::Tileset>> m_tilesets;
 
     void processArguments(int argc, const char **argv);
+    /**
+     * @brief Tells the Application to start running
+     *
+     */
     int run(void);
 
+    /**
+     * @brief Exits the Application
+     *
+     */
+    void quit(void);
+
   private:
+    bool m_running = true;
     sf::Event m_event;
     sf::Clock m_clock;
     sf::Time m_frame_time;

@@ -40,11 +40,16 @@ Engine::Atlas::Atlas(const std::string t_file_path) {
       // We know the next three lines for a layer is the layer sectional data
       // So just advance the iterator and set the data
       uint val;
-      iss = std::istringstream(*(iter++));
+      iter++;
+      iss = std::istringstream(*iter);
       while (iss >> val) l.base.push_back(val);
-      iss = std::istringstream(*(iter++));
+
+      iter++;
+      iss = std::istringstream(*iter);
       while (iss >> val) l.decoration.push_back(val);
-      iss = std::istringstream(*(iter++));
+
+      iter++;
+      iss = std::istringstream(*iter);
       while (iss >> val) l.collision.push_back(val);
 
       layers.push_back(l);

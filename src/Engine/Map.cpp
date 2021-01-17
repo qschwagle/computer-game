@@ -1,30 +1,34 @@
 #include "Map.hpp"
 
 Engine::Map::Map(AssetProvider& t_asset_provider, std::shared_ptr<Engine::Atlas> t_atlas) {
-  LOG_TRACE("Engine::Engine()");
+  LOG_TRACE("Engine::Map::Map()");
   m_atlas = t_atlas;
+
   m_layer = t_atlas->layers[0];
+  m_tiles = m_layer.base;
+
+  // Map size in tiles
   m_width = t_atlas->width;
   m_height = t_atlas->height;
+  // Tile size
   m_tile_width = t_atlas->tile_width;
   m_tile_height = t_atlas->tile_height;
+  // Map size in pixels
   m_width_pixel = m_width * m_tile_width;
   m_height_pixel = m_height * m_tile_height;
 
   // Get the blocking tile by searching for the collision tileset
-  for (auto it = t_atlas->tilesets.begin(); it != t_atlas->tilesets.end(); it++) {
-    auto tileset = t_asset_provider.getTileset(it->second);
-    m_textures[tileset->texture_src] = t_asset_provider.getTexture(tileset->texture_src);
+  for (auto tileset_iter = t_atlas->tilesets.begin(); tileset_iter != t_atlas->tilesets.end(); tileset_iter++) {
+    auto tileset = t_asset_provider.getTileset(tileset_iter->second);
 
-    // Super hacker, start index at 1
-    // so we don't calculate tile_id - 1 each tile each frame, just offset memory by 1
-    m_uvs.push_back(sf::IntRect());
-    for (auto uv_it = tileset->uvs.begin(); uv_it < tileset->uvs.end(); uv_it++)
-      m_uvs.push_back(*uv_it);
+    uint tile_id_iter = tileset_iter->first;
+    for (auto uv_iter = tileset->uvs.begin(); uv_iter < tileset->uvs.end(); uv_iter++, ++tile_id_iter) {
+      m_uvs[tile_id_iter] = *uv_iter;
+      m_textures[tile_id_iter] = t_asset_provider.getTexture(tileset->texture_src);
+    }
 
-    if (it->second == "collision") {
-      m_blocking_tile = it->first;
-      break;
+    if (tileset_iter->second == "collision") {
+      m_blocking_tile = tileset_iter->first;
     }
   }
   LOG_INFO("Blocking tile is: {}", m_blocking_tile);
@@ -49,14 +53,18 @@ void Engine::Map::goTo(uint t_x, uint t_y) {
 }
 
 uint Engine::Map::getTile(uint t_x, uint t_y) {
-  return m_tiles[(t_x + 1) + (t_y * m_width)];
+  auto calc = t_x + (t_y * m_width);
+  auto out = m_tiles[calc];
+  return out;
 }
 
 void Engine::Map::render(std::shared_ptr<Engine::Window> t_window) {
+  // LOG_TRACE("Engine::Map::render()");
   renderLayer(t_window, m_layer);
 }
 
 void Engine::Map::renderLayer(std::shared_ptr<Engine::Window> t_window, Engine::Layer t_layer) {
+  // LOG_TRACE("Engine::Map::renderLayer()");
   auto screenSize = t_window->getScreenSize();
   auto top_left_coord = pixelToTile(
       m_cam_x - (screenSize.x / 2),
@@ -65,12 +73,18 @@ void Engine::Map::renderLayer(std::shared_ptr<Engine::Window> t_window, Engine::
       m_cam_x + (screenSize.x / 2),
       m_cam_y + (screenSize.y / 2));
 
-  for (uint j = top_left_coord.x; j < bottom_right_coord.x; ++j) {
-    for (uint i = top_left_coord.y; j < bottom_right_coord.y; ++i) {
-      auto tile = getTile(i, j);
-      if (tile < 1) continue;
+  std::shared_ptr<sf::Texture> cached_texture = nullptr;
+  for (uint j = top_left_coord.y, y_mx = bottom_right_coord.y + 1; j < y_mx; ++j) {
+    for (uint i = top_left_coord.x, x_mx = bottom_right_coord.x; i <  x_mx + 1; ++i) {
+      uint tile = getTile(i, j);
+      if (tile < 1) continue; // We don't render 0
 
-      m_sprite.setTextureRect(m_uvs[tile]); // Don't need to skip 0 since adjusted starting index in memory
+      // Don't change the texture of the sprite unless we need to
+      if (m_textures[tile] != cached_texture) {
+        m_sprite.setTexture(*m_textures[tile]);
+        cached_texture = m_textures[tile];
+      }
+      m_sprite.setTextureRect(m_uvs[tile]);
       m_sprite.setPosition(m_x + i * m_tile_width, m_y + j * m_tile_height);
 
       t_window->draw(m_sprite);

@@ -27,6 +27,10 @@ void Application::init() {
   loadTilesets();
 }
 
+void Application::quit() {
+  m_running = false;
+}
+
 int Application::run() {
   // Setup anything that we need setup
   init();
@@ -46,7 +50,7 @@ void Application::loop() {
   sf::Time previous = m_clock.getElapsedTime();
   sf::Time lag = sf::Time::Zero;
 
-  while(m_window->isOpen() && !m_stack->isEmpty())
+  while(m_running && m_window->isOpen() && !m_stack->isEmpty())
   {
     sf::Time current = m_clock.getElapsedTime();
     sf::Time elapsed = current - previous;
@@ -108,14 +112,14 @@ void Application::loadTextures() {
 }
 
 std::shared_ptr<sf::Texture> Application::getTexture(std::string t_key) {
-  LOG_TRACE("Application::getTexture({})", t_key);
+  // LOG_TRACE("Application::getTexture({})", t_key);
 
   auto tex = m_textures.find(t_key);
   return tex != m_textures.end() ? tex->second : nullptr;
 }
 
 std::shared_ptr<Engine::Tileset> Application::getTileset(std::string t_key) {
-  LOG_TRACE("Application::getTileset({})", t_key);
+  // LOG_TRACE("Application::getTileset({})", t_key);
 
   auto tileset = m_tilesets.find(t_key);
   return tileset != m_tilesets.end() ? tileset->second : nullptr;

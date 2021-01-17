@@ -16,7 +16,7 @@ namespace Engine {
   class Map {
     public:
       Map(AssetProvider& t_asset_provider, std::shared_ptr<Engine::Atlas> t_atlas);
-      ~Map();
+      ~Map() = default;
 
     void goTo(uint t_x, uint t_y);
     uint getTile(uint t_x, uint t_y);
@@ -29,8 +29,8 @@ namespace Engine {
       int m_cam_y = 0;
 
       std::shared_ptr<Engine::Atlas> m_atlas;
-      std::unordered_map<std::string, std::shared_ptr<sf::Texture>> m_textures;
-      std::vector<sf::IntRect> m_uvs;
+      std::unordered_map<uint, std::shared_ptr<sf::Texture>> m_textures;
+      std::unordered_map<uint, sf::IntRect> m_uvs;
 
       sf::Sprite m_sprite;
       Engine::Layer m_layer;

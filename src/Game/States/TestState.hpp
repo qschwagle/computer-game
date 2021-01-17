@@ -14,6 +14,7 @@
 #include "Engine/Window.hpp"
 #include "Engine/Map.hpp"
 
+#include "Game/Application.hpp"
 #include "Game/Maps/TestMap.hpp"
 
 class TestState : public Engine::IState {
@@ -30,6 +31,7 @@ class TestState : public Engine::IState {
     void enter(void) override;
 
     void exit(void) override;
-  // protected:
-    // Engine::Map m_map;
+
+  protected:
+    std::shared_ptr<Engine::Map> m_map;
 };
