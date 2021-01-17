@@ -134,3 +134,9 @@ void Engine::Window::reset(void) const {
 void Engine::Window::display(void) const {
   m_window->display();
 }
+
+sf::Vector2i Engine::Window::getScreenSize() {
+  return sf::Vector2i(m_window_width, m_window_height);
+}
+
+

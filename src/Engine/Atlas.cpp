@@ -2,7 +2,6 @@
 
 Engine::Tileset::Tileset(const std::string t_file_path) {
   std::vector<std::string> file_vec = Helper::getFileLines(t_file_path);
-  src = t_file_path;
 
   for (auto iter = file_vec.begin(); iter < file_vec.end(); iter++) {
     std::istringstream iss(*iter);
@@ -10,6 +9,7 @@ Engine::Tileset::Tileset(const std::string t_file_path) {
     iss >> type;
 
     if (type == "id") iss >> id;
+    else if (type == "texture") iss >> texture_src;
     else if (type == "data") iss >> columns >> rows >> tile_height >> tile_width >> margin >> spacing;
   }
 

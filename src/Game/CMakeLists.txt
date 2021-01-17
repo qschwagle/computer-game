@@ -1,6 +1,6 @@
 add_library(game
   Application.cpp
-  Maps/TestMap.hpp
+  # Maps/TestMap.hpp
   States/TempState.cpp
 )
 

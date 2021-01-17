@@ -1,16 +1,10 @@
 #pragma once
 
-#include "Engine/Atlas.hpp"
+//# include "Engine/Atlas.hpp"
+//# include "Game/Application.hpp"
 
 namespace Atlas {
-  inline Engine::Atlas createTestMap() {
-    // std::cout << "Creating Test Map" << std::endl;
-    // Create atlas
-    Engine::Atlas a("assets/maps/test.map");
-
-    // Save function ptrs to atlas
-
-    // Ship it
-    return a;
-  }
+  // class TestMap : public Engine::Atlas {
+    // TestMap() : Engine::Atlas(Application::instance() "assets/maps/test.map") {};
+  // };
 }

@@ -1,6 +1,7 @@
 add_library(engine
     Animation.cpp
     Atlas.cpp
+    AssetProvider.hpp
     IState.hpp
     Map.cpp
     StateStack.cpp

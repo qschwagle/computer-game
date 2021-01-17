@@ -24,6 +24,7 @@ void Application::init() {
   // Seed random?
   // Load assets
   loadTextures();
+  loadTilesets();
 }
 
 int Application::run() {
@@ -76,8 +77,8 @@ void Application::loadTilesets() {
   BOOST_LOG_TRIVIAL(trace) << "Application::loadTilesets()";
 
   auto lines = Helper::getFileLines("assets/manifests/tilesets.manifest");
-  for (auto iter = lines.begin(); iter < lines.end(); iter++) {
-    std::string file_path = *iter;
+  for (auto it = lines.begin(); it < lines.end(); it++) {
+    std::string file_path = *it;
 
     // Instead of the manifest key, lets use what's in the tileset
     auto tileset = std::make_shared<Engine::Tileset>(Engine::Tileset(file_path));
@@ -92,8 +93,8 @@ void Application::loadTextures() {
   BOOST_LOG_TRIVIAL(trace) << "Application::loadTextures()";
 
   auto lines = Helper::getFileLines("assets/manifests/textures.manifest");
-  for (auto iter = lines.begin(); iter < lines.end(); iter++) {
-    std::istringstream iss(*iter);
+  for (auto it = lines.begin(); it < lines.end(); it++) {
+    std::istringstream iss(*it);
     std::string key, file_path;
     iss >> key >> file_path;
 
@@ -108,8 +109,14 @@ void Application::loadTextures() {
 
 std::shared_ptr<sf::Texture> Application::getTexture(std::string t_key) {
   BOOST_LOG_TRIVIAL(trace) << "Application::getTexture(" << t_key << ")";
-  // std::cout << "Helper::getTexture()" << std::endl;
-  auto textures = Application::instance().m_textures;
-  auto tex = textures.find(t_key);
-  return tex != textures.end() ? tex->second : nullptr;
+
+  auto tex = m_textures.find(t_key);
+  return tex != m_textures.end() ? tex->second : nullptr;
+}
+
+std::shared_ptr<Engine::Tileset> Application::getTileset(std::string t_key) {
+  BOOST_LOG_TRIVIAL(trace) << "Application::getTileset(" << t_key << ")";
+
+  auto tileset = m_tilesets.find(t_key);
+  return tileset != m_tilesets.end() ? tileset->second : nullptr;
 }

@@ -77,7 +77,7 @@ namespace Engine {
 
       sf::View calcView(const float t_window_width, const float t_window_height);
 
-
+      sf::Vector2i getScreenSize();
 
     private:
       /**

@@ -30,7 +30,7 @@ namespace Engine {
       uint tile_height;
       uint margin;
       uint spacing;
-      std::string src;
+      std::string texture_src;
       std::vector<sf::IntRect> uvs;
   };
 
@@ -46,6 +46,7 @@ namespace Engine {
       uint height;
       uint tile_width;
       uint tile_height;
+      // The first_tile_id, and the manifest key to the tileset
       std::unordered_map<uint, std::string> tilesets;
       std::vector<Layer> layers;
   };

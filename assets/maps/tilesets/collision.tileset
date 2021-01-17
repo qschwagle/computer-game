@@ -1,4 +1,5 @@
 # id: tileset_id
 # data: columns rows tile_height tile_width margin spacing
 id collision
+texture collision
 data 1 1 10 10 0 0

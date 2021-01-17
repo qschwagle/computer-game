@@ -16,13 +16,15 @@
 #include "NoCopy.hpp"
 #include "NoMove.hpp"
 
+#include "Engine/AssetProvider.hpp"
 #include "Engine/Atlas.hpp"
 #include "Engine/Window.hpp"
 #include "Engine/StateStack.hpp"
 #include "States/TempState.hpp"
 
-class Application : public Traits::NoCopy, public Traits::NoMove {
+class Application : public Traits::NoCopy, public Traits::NoMove, public Engine::AssetProvider {
   public:
+    ~Application(void) override = default;
     /**
      * @brief Gets the instance of the application, if it doesn't exist instanciates it
      *
@@ -81,6 +83,6 @@ class Application : public Traits::NoCopy, public Traits::NoMove {
      */
     void loadTextures();
 
-    std::shared_ptr<Engine::Tileset> getTileset(std::string t_key);
-    std::shared_ptr<sf::Texture> getTexture(std::string t_key);
+    std::shared_ptr<Engine::Tileset> getTileset(std::string t_key) override;
+    std::shared_ptr<sf::Texture> getTexture(std::string t_key) override;
 };

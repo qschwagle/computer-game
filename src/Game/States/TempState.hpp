@@ -6,14 +6,16 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Helper.hpp"
+
 #include "Engine/StateStack.hpp"
 #include "Engine/IState.hpp"
 #include "Engine/Window.hpp"
+#include "Engine/Map.hpp"
+
 #include "Game/Application.hpp"
 #include "Engine/Atlas.hpp"
-#include "Helper.hpp"
 #include "Game/Maps/TestMap.hpp"
-
 
 class TempState : public Engine::IState {
   public:
@@ -29,4 +31,6 @@ class TempState : public Engine::IState {
     void enter(void) override;
 
     void exit(void) override;
+  // protected:
+    // Engine::Map m_map(Application::instance(), Engine::Atlas("assets/maps/test.map"));
 };
