@@ -1,0 +1,5 @@
+# id: tileset_id
+# data: columns rows tile_height tile_width margin spacing
+id dungeon
+texture dungeon
+data 5 11 10 10 10 10

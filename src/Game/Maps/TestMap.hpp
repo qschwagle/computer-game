@@ -5,6 +5,6 @@
 namespace Maps {
   class TestMap : public Engine::Atlas {
     public:
-      TestMap() : Engine::Atlas("assets/maps/test.map") {};
+      TestMap() : Engine::Atlas("assets/maps/dungeon.atlas") {};
   };
 }

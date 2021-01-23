@@ -16,6 +16,9 @@ Engine::Tileset::Tileset(const std::string t_file_path) {
   uvs = Helper::getTileRects(columns, rows, tile_height, tile_width, margin, spacing);
 }
 
+// Engine::Atlas::Atlas(Engine::AssetProvider& t_asset_provider, const std::string t_manifest_key)
+  // : Engine::Atlas::Atlas(t_asset_provider.getAtlas(t_manifest_key)) { }
+
 Engine::Atlas::Atlas(const std::string t_file_path) {
 
   std::vector<std::string> file_vec = Helper::getFileLines(t_file_path);
