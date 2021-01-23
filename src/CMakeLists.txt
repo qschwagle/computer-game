@@ -2,10 +2,16 @@ add_subdirectory(Traits)
 add_subdirectory(Engine)
 add_subdirectory(Game)
 
-set(SOURCE main.cpp)
-add_executable(${PROJECT_NAME} ${SOURCE})
+# TestVendors
+add_executable(testVendors testVendors.cpp)
+target_include_directories(testVendors PUBLIC "${SPDLOG_DIR}/include")
+target_link_libraries(testVendors ImGui-SFML::ImGui-SFML)
+# End TestVendors
 
-# Flags
+# ComputerGame
+add_executable(${PROJECT_NAME} main.cpp)
 target_compile_options(${PROJECT_NAME} PRIVATE ${flags})
+target_link_libraries(${PROJECT_NAME} traits engine game ImGui-SFML::ImGui-SFML)
+# End ComputerGame
 
-target_link_libraries(${PROJECT_NAME} traits engine game ${SFML_LIBRARIES} ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+include(Install.cmake)
