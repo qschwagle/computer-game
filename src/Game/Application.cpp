@@ -18,13 +18,19 @@ void Application::init() {
   m_window = std::make_shared<Engine::Window>();
   m_frame_time = sf::seconds(1.0 / m_window->getFps());
 
-  // Initiate the state stack
-  m_stack = std::make_shared<Engine::StateStack>();
-
   // Seed random?
+  // Todo setup random
+
   // Load assets
   loadTextures();
   loadTilesets();
+
+  // Initiate the state stack
+  m_stack = std::make_shared<Engine::StateStack>();
+}
+
+void Application::createInitialState() {
+  m_stack->push(std::make_shared<TestState>(m_stack));
 }
 
 void Application::quit() {
@@ -36,7 +42,7 @@ int Application::run() {
   init();
 
   // Throw our first state on the stack
-  m_stack->push(std::make_shared<TestState>(m_stack));
+  createInitialState();
 
   // Run loop
   loop();

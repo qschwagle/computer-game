@@ -52,7 +52,7 @@ class Application : public Traits::NoCopy, public Traits::NoMove, public Engine:
      */
     void quit(void);
 
-  private:
+  protected:
     bool m_running = true;
     sf::Event m_event;
     sf::Clock m_clock;
@@ -75,6 +75,12 @@ class Application : public Traits::NoCopy, public Traits::NoMove, public Engine:
      *
      */
     void init(void);
+
+    /**
+     * @brief Loads the starting state of the Application
+     *
+     */
+    void createInitialState(void);
 
     /**
      * @brief The game loop which runs every frame, calls preFrame, onFrame, postFrame respectively
