@@ -1,5 +1,5 @@
 add_library(game
-  Application.cpp
+  ComputerGame.cpp
   Maps/TestMap.hpp
   States/TestState.cpp
 )

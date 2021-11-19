@@ -1,4 +1,5 @@
 add_library(engine
+    Application.cpp
     Animation.cpp
     Atlas.cpp
     AssetProvider.hpp

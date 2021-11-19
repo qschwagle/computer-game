@@ -1,17 +1,11 @@
 #include "Application.hpp"
 
-Application& Application::instance(void) {
-  // std::cout << "Application::instance()" << std::endl;
-  static Application m_instance;
-  return m_instance;
-}
-
-void Application::processArguments([[maybe_unused]] int argc, [[maybe_unused]] const char **argv) {
+void Engine::Application::processArguments([[maybe_unused]] int argc, [[maybe_unused]] const char **argv) {
   // Might do stuff here later
   // LOG_TRACE("Application::processArguments()");
 }
 
-void Application::init() {
+void Engine::Application::init() {
   LOG_TRACE("Application::init()");
 
   // Create window
@@ -29,15 +23,11 @@ void Application::init() {
   m_stack = std::make_shared<Engine::StateStack>();
 }
 
-void Application::createInitialState() {
-  m_stack->push(std::make_shared<TestState>(m_stack));
-}
-
-void Application::quit() {
+void Engine::Application::quit() {
   m_running = false;
 }
 
-int Application::run() {
+int Engine::Application::run() {
   // Setup anything that we need setup
   init();
 
@@ -50,7 +40,7 @@ int Application::run() {
   return Engine::NoError;
 }
 
-void Application::loop() {
+void Engine::Application::loop() {
   LOG_TRACE("Application::loop()");
 
   sf::Time previous = m_clock.getElapsedTime();
@@ -83,7 +73,7 @@ void Application::loop() {
   }
 }
 
-void Application::loadTilesets() {
+void Engine::Application::loadTilesets() {
  LOG_TRACE("Application::loadTilesets()");
 
   auto lines = Helper::getFileLines("assets/manifests/tilesets.manifest");
@@ -99,7 +89,7 @@ void Application::loadTilesets() {
   }
 }
 
-void Application::loadTextures() {
+void Engine::Application::loadTextures() {
   LOG_TRACE("Application::loadTextures()");
 
   auto lines = Helper::getFileLines("assets/manifests/textures.manifest");
@@ -117,14 +107,14 @@ void Application::loadTextures() {
   }
 }
 
-std::shared_ptr<sf::Texture> Application::getTexture(std::string t_key) {
+std::shared_ptr<sf::Texture> Engine::Application::getTexture(std::string t_key) {
   // LOG_TRACE("Application::getTexture({})", t_key);
 
   auto tex = m_textures.find(t_key);
   return tex != m_textures.end() ? tex->second : nullptr;
 }
 
-std::shared_ptr<Engine::Tileset> Application::getTileset(std::string t_key) {
+std::shared_ptr<Engine::Tileset> Engine::Application::getTileset(std::string t_key) {
   // LOG_TRACE("Application::getTileset({})", t_key);
 
   auto tileset = m_tilesets.find(t_key);

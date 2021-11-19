@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Log.hpp"
 #include "Constant.hpp"
 #include "NoCopy.hpp"
 #include "NoMove.hpp"
@@ -69,6 +70,7 @@ namespace Engine {
        */
       bool isOpen();
 
+      void setPosition(const int t_x, const int t_y);
       void setFullscreen(bool t_fullscreen);
       void setFps(float t_fps);
       float getFps() const;

@@ -1,5 +1,5 @@
 # id: tileset_id
 # data: columns rows tile_height tile_width margin spacing
-id forest
-texture forest
-data 4 2 10 10 10 10 10
+id monsters
+texture monsters
+data 17 32 10 10 6 24 10

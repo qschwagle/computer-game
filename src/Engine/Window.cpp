@@ -12,9 +12,10 @@ Engine::Window::Window(unsigned int t_window_width, unsigned int t_window_height
   m_window = std::make_shared<sf::RenderWindow>(sf::VideoMode(m_window_width, m_window_height), m_window_title, sf::Style::Default);
 
   if (m_window == nullptr) {
-    std::cerr << "Cannot create SFML Window. Make sure DISPLAY=:0 environment variable is set." << std::endl;
+   LOG_ERROR("Cannot create SFML Window. Make sure DISPLAY=:0 environment variable is set.");
     // Engine::Window::~Window();
   }
+  m_window->setKeyRepeatEnabled(false);
 }
 
 Engine::Window::~Window() {
@@ -55,6 +56,10 @@ void Engine::Window::draw(const sf::Drawable &t_drawable, const sf::RenderStates
 
 bool Engine::Window::isOpen() {
   return m_window->isOpen();
+}
+
+void Engine::Window::setPosition(const int t_x, const int t_y) {
+  m_window->setPosition(sf::Vector2i(t_x, t_y));
 }
 
 // Probably fucked

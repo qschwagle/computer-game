@@ -10,10 +10,10 @@ Engine::Tileset::Tileset(const std::string t_file_path) {
 
     if (type == "id") iss >> id;
     else if (type == "texture") iss >> texture_src;
-    else if (type == "data") iss >> columns >> rows >> tile_height >> tile_width >> margin >> spacing;
+    else if (type == "data") iss >> columns >> rows >> tile_height >> tile_width >> margin_x >> margin_y >> spacing;
   }
 
-  uvs = Helper::getTileRects(columns, rows, tile_height, tile_width, margin, spacing);
+  uvs = Helper::getTileRects(columns, rows, tile_height, tile_width, margin_x, margin_y, spacing);
 }
 
 // Engine::Atlas::Atlas(Engine::AssetProvider& t_asset_provider, const std::string t_manifest_key)

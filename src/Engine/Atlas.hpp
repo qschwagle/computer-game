@@ -28,7 +28,8 @@ namespace Engine {
       uint rows;
       uint tile_width;
       uint tile_height;
-      uint margin;
+      uint margin_x;
+      uint margin_y;
       uint spacing;
       std::string texture_src;
       std::vector<sf::IntRect> uvs;

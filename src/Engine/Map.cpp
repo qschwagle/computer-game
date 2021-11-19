@@ -1,4 +1,5 @@
 #include "Map.hpp"
+#include "SFML/System/Vector2.hpp"
 
 Engine::Map::Map(AssetProvider& t_asset_provider, std::shared_ptr<Engine::Atlas> t_atlas) {
   LOG_TRACE("Engine::Map::Map()");
@@ -17,6 +18,13 @@ Engine::Map::Map(AssetProvider& t_asset_provider, std::shared_ptr<Engine::Atlas>
   m_width_pixel = m_width * m_tile_width;
   m_height_pixel = m_height * m_tile_height;
 
+  // This isn't centering the map
+  m_x = 0;
+  m_y = 0;
+  m_cam_x = Engine::NativeWidth / 2 + m_tile_width / 2;
+  m_cam_y = Engine::NativeHeight / 2 + m_tile_height / 2;
+
+
   // Get the blocking tile by searching for the collision tileset
   for (auto tileset_iter = t_atlas->tilesets.begin(); tileset_iter != t_atlas->tilesets.end(); tileset_iter++) {
     auto tileset = t_asset_provider.getTileset(tileset_iter->second);
@@ -34,12 +42,12 @@ Engine::Map::Map(AssetProvider& t_asset_provider, std::shared_ptr<Engine::Atlas>
   LOG_INFO("Blocking tile is: {}", m_blocking_tile);
 }
 
-sf::Vector2i Engine::Map::pixelToTile(int t_x, int t_y) {
+sf::Vector2i Engine::Map::pixelToTile(float t_x, float t_y) {
   // Clamp to bounds of map
-  int x = std::max<int>(m_x, t_x);
-  int y = std::max<int>(m_y, t_y);
-  x = std::min<int>(m_x + m_width_pixel - 1, x);
-  y = std::min<int>(m_y + m_height_pixel - 1, y);
+  float x = std::max<float>(m_x, t_x);
+  float y = std::max<float>(m_y, t_y);
+  x = std::min<float>(m_x + m_width_pixel - 1, x);
+  y = std::min<float>(m_y + m_height_pixel - 1, y);
 
   // Map from the bounded point to a tile
   const int tileX = (m_x + x) / m_tile_width;
@@ -48,18 +56,40 @@ sf::Vector2i Engine::Map::pixelToTile(int t_x, int t_y) {
   return sf::Vector2i(tileX, tileY);
 }
 
-void Engine::Map::goTo(uint t_x, uint t_y) {
+sf::Vector2f Engine::Map::tileToPixel(uint t_x, uint t_y) {
+  int x = std::clamp<uint>(t_x, 0, m_width);
+  int y = std::clamp<uint>(t_y, 0, m_height);
+  return sf::Vector2f((t_x * m_tile_width) - m_x, (t_y * m_tile_height) - m_y);
+}
 
+void Engine::Map::goTo(uint t_x, uint t_y) {
+  m_cam_x = t_x + Engine::NativeWidth / 2;
+  m_cam_y = t_y + Engine::NativeHeight / 2;
+}
+
+sf::Vector2u Engine::Map::getSize(void) {
+  return sf::Vector2u(m_width_pixel, m_height_pixel);
+}
+
+void Engine::Map::goToTile(uint t_x, uint t_y) {
+  goTo(
+    (t_x * m_tile_width) + m_tile_width / 2,
+    (t_y * m_tile_height) + m_tile_height / 2
+  );
 }
 
 uint Engine::Map::getTile(uint t_x, uint t_y) {
-  auto calc = t_x + (t_y * m_width);
-  auto out = m_tiles[calc];
-  return out;
+  return m_tiles[t_x + (t_y * m_width)];
 }
 
 void Engine::Map::render(std::shared_ptr<Engine::Window> t_window) {
   // LOG_TRACE("Engine::Map::render()");
+  // Render a black background that's the size of the map, it doesn't move lets us see the edge of the map via camera
+  sf::RectangleShape map_bg(sf::Vector2f(m_width_pixel, m_height_pixel));
+  map_bg.setFillColor(sf::Color::Black);
+  map_bg.setPosition(m_x, m_y);
+  t_window->draw(map_bg);
+
   renderLayer(t_window, m_layer);
 }
 

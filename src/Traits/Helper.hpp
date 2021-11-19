@@ -15,7 +15,8 @@ namespace Helper {
       const unsigned int t_tile_height,
       const unsigned int t_cols,
       const unsigned int t_rows,
-      const unsigned int t_margin,
+      const unsigned int t_margin_x,
+      const unsigned int t_margin_y,
       const unsigned int t_spacing);
 
   std::string stripPath(std::string t_s);

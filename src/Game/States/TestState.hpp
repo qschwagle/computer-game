@@ -14,7 +14,7 @@
 #include "Engine/Window.hpp"
 #include "Engine/Map.hpp"
 
-#include "Game/Application.hpp"
+#include "Game/ComputerGame.hpp"
 #include "Game/Maps/TestMap.hpp"
 
 class TestState : public Engine::IState {
@@ -34,4 +34,5 @@ class TestState : public Engine::IState {
 
   protected:
     std::shared_ptr<Engine::Map> m_map;
+    sf::Sprite hero;
 };

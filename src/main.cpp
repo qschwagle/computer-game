@@ -3,7 +3,8 @@
 
 #include "Log.hpp"
 #include "Constant.hpp"
-#include "Game/Application.hpp"
+#include "Engine/Application.hpp"
+#include "Game/ComputerGame.hpp"
 
 int main([[maybe_unused]] int argc, [[maybe_unused]] const char **argv)
 {
@@ -11,7 +12,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] const char **argv)
 
   int exitCode = Engine::NoError;
 
-  Application* app = &Application::instance();
+  ComputerGame* app = &ComputerGame::instance();
   assert(app != nullptr && "main() Can't create Application");
 
   // Handle any command line arguments passed in

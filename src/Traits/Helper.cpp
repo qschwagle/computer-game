@@ -5,7 +5,8 @@ std::vector<sf::IntRect> Helper::getTileRects(
     const uint t_rows,
     const uint t_tile_width,
     const uint t_tile_height,
-    const uint t_margin = 0,
+    const uint t_margin_x = 0,
+    const uint t_margin_y = 0,
     const uint t_spacing = 0) {
   std::vector<sf::IntRect> rects;
 
@@ -14,8 +15,8 @@ std::vector<sf::IntRect> Helper::getTileRects(
   for(uint j = 0; j < t_rows; ++j) {
     for(uint i = 0; i < t_cols; ++i) {
 
-      x = t_margin + i * (t_tile_width + t_spacing);
-      y = t_margin + j * (t_tile_height + t_spacing);
+      x = t_margin_x + i * (t_tile_width + t_spacing);
+      y = t_margin_y + j * (t_tile_height + t_spacing);
 
       rects.push_back(sf::IntRect(x, y, t_tile_width, t_tile_height));
     }
