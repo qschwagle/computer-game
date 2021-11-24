@@ -18,7 +18,8 @@ namespace Engine {
       Map(AssetProvider& t_asset_provider, std::shared_ptr<Engine::Atlas> t_atlas);
       ~Map() = default;
 
-      void goTo(uint t_x, uint t_y);
+      void goTo(sf::Vector2i t_pos);
+      void goTo(int t_x, int t_y);
 
       void goToTile(uint t_x, uint t_y);
 
