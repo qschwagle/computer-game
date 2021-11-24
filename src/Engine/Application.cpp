@@ -2,11 +2,11 @@
 
 void Engine::Application::processArguments([[maybe_unused]] int argc, [[maybe_unused]] const char **argv) {
   // Might do stuff here later
-  // LOG_TRACE("Application::processArguments()");
+  // LOG_TRACE("Engine::Application::processArguments()");
 }
 
 void Engine::Application::init() {
-  LOG_TRACE("Application::init()");
+  LOG_TRACE("Engine::Application::init()");
 
   // Create window
   m_window = std::make_shared<Engine::Window>();
@@ -41,7 +41,7 @@ int Engine::Application::run() {
 }
 
 void Engine::Application::loop() {
-  LOG_TRACE("Application::loop()");
+  LOG_TRACE("Engine::Application::loop()");
 
   sf::Time previous = m_clock.getElapsedTime();
   sf::Time lag = sf::Time::Zero;
@@ -74,9 +74,9 @@ void Engine::Application::loop() {
 }
 
 void Engine::Application::loadTilesets() {
- LOG_TRACE("Application::loadTilesets()");
+ LOG_TRACE("Engine::Application::loadTilesets()");
 
-  auto lines = Helper::getFileLines("assets/manifests/tilesets.manifest");
+  auto lines = Helper::getFileLines(m_tilesets_manifest_path);
   for (auto it = lines.begin(); it < lines.end(); it++) {
     std::string file_path = *it;
 
@@ -90,9 +90,9 @@ void Engine::Application::loadTilesets() {
 }
 
 void Engine::Application::loadTextures() {
-  LOG_TRACE("Application::loadTextures()");
+  LOG_TRACE("Engine::Application::loadTextures()");
 
-  auto lines = Helper::getFileLines("assets/manifests/textures.manifest");
+  auto lines = Helper::getFileLines(m_textures_manifest_path);
   for (auto it = lines.begin(); it < lines.end(); it++) {
     std::istringstream iss(*it);
     std::string key, file_path;
@@ -108,14 +108,14 @@ void Engine::Application::loadTextures() {
 }
 
 std::shared_ptr<sf::Texture> Engine::Application::getTexture(std::string t_key) {
-  // LOG_TRACE("Application::getTexture({})", t_key);
+  // LOG_TRACE("Engine::Application::getTexture({})", t_key);
 
   auto tex = m_textures.find(t_key);
   return tex != m_textures.end() ? tex->second : nullptr;
 }
 
 std::shared_ptr<Engine::Tileset> Engine::Application::getTileset(std::string t_key) {
-  // LOG_TRACE("Application::getTileset({})", t_key);
+  // LOG_TRACE("Engine::Application::getTileset({})", t_key);
 
   auto tileset = m_tilesets.find(t_key);
   return tileset != m_tilesets.end() ? tileset->second : nullptr;

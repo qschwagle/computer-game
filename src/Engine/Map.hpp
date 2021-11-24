@@ -34,6 +34,8 @@ namespace Engine {
       sf::Vector2f tileToPixel(uint t_x, uint t_y);
       sf::Vector2i pixelToTile(float x, float y);
 
+      void setPosition(float t_x, float t_y);
+
     protected:
       int m_x = 0;
       int m_y = 0;

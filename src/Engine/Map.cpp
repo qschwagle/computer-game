@@ -21,8 +21,10 @@ Engine::Map::Map(AssetProvider& t_asset_provider, std::shared_ptr<Engine::Atlas>
   // This isn't centering the map
   m_x = 0;
   m_y = 0;
-  m_cam_x = Engine::NativeWidth / 2 + m_tile_width / 2;
-  m_cam_y = Engine::NativeHeight / 2 + m_tile_height / 2;
+  // m_cam_x = Engine::NativeWidth / 2 + m_tile_width / 2;
+  // m_cam_y = Engine::NativeHeight / 2 + m_tile_height / 2;
+  m_cam_x = 0;
+  m_cam_y = 0;
 
 
   // Get the blocking tile by searching for the collision tileset
@@ -44,22 +46,25 @@ Engine::Map::Map(AssetProvider& t_asset_provider, std::shared_ptr<Engine::Atlas>
 
 sf::Vector2i Engine::Map::pixelToTile(float t_x, float t_y) {
   // Clamp to bounds of map
-  float x = std::max<float>(m_x, t_x);
-  float y = std::max<float>(m_y, t_y);
-  x = std::min<float>(m_x + m_width_pixel - 1, x);
-  y = std::min<float>(m_y + m_height_pixel - 1, y);
+  float x = std::clamp<float>(t_x, m_x, m_x + m_width_pixel - 1);
+  float y = std::clamp<float>(t_y, m_y, m_y + m_height_pixel - 1);
 
   // Map from the bounded point to a tile
-  const int tileX = (m_x + x) / m_tile_width;
-  const int tileY = (m_y + y) / m_tile_height;
+  const int tileX = (x - m_x) / m_tile_width;
+  const int tileY = (y - m_y) / m_tile_height;
 
   return sf::Vector2i(tileX, tileY);
 }
 
 sf::Vector2f Engine::Map::tileToPixel(uint t_x, uint t_y) {
-  int x = std::clamp<uint>(t_x, 0, m_width);
-  int y = std::clamp<uint>(t_y, 0, m_height);
-  return sf::Vector2f((t_x * m_tile_width) - m_x, (t_y * m_tile_height) - m_y);
+  const int x_tile = std::clamp<uint>(t_x, 0, m_width);
+  const int y_tile = std::clamp<uint>(t_y, 0, m_height);
+  return sf::Vector2f((x_tile * m_tile_width) + m_x, (y_tile * m_tile_height) + m_y);
+}
+
+void Engine::Map::setPosition(float t_x, float t_y) {
+  m_x = t_x;
+  m_y = t_y;
 }
 
 void Engine::Map::goTo(uint t_x, uint t_y) {
@@ -97,11 +102,23 @@ void Engine::Map::renderLayer(std::shared_ptr<Engine::Window> t_window, Engine::
   // LOG_TRACE("Engine::Map::renderLayer()");
   auto screenSize = t_window->getScreenSize();
   auto top_left_coord = pixelToTile(
-      m_cam_x - (screenSize.x / 2),
-      m_cam_y - (screenSize.y / 2));
+      m_cam_x - (screenSize.x / 2.0),
+      m_cam_y - (screenSize.y / 2.0));
   auto bottom_right_coord  = pixelToTile(
-      m_cam_x + (screenSize.x / 2),
-      m_cam_y + (screenSize.y / 2));
+      m_cam_x + (screenSize.x / 2.0),
+      m_cam_y + (screenSize.y / 2.0));
+  // map x,y: 30,30
+  // top_left_coord: 6,6
+  // m_cam: 0,0
+  // screenSize: 1024,768
+  LOG_TRACE("map x,y: {},{}", m_x, m_y);
+  LOG_TRACE("bottom_right_coord: {},{}", bottom_right_coord.x, bottom_right_coord.y);
+  LOG_TRACE("m_cam: {},{}", m_cam_x, m_cam_y);
+  LOG_TRACE("screenSize: {},{}", screenSize.x, screenSize.y);
+  LOG_TRACE("m_tile_size: {},{}", m_tile_width, m_tile_height);
+
+  // therefore top_left_coord = pixelToTile(-512, -384)
+  // therefore bottom_right_coord = pixelToTile(512, 384)
 
   std::shared_ptr<sf::Texture> cached_texture = nullptr;
   for (uint j = top_left_coord.y, y_mx = bottom_right_coord.y + 1; j < y_mx; ++j) {
@@ -115,7 +132,7 @@ void Engine::Map::renderLayer(std::shared_ptr<Engine::Window> t_window, Engine::
         cached_texture = m_textures[tile];
       }
       m_sprite.setTextureRect(m_uvs[tile]);
-      m_sprite.setPosition(m_x + i * m_tile_width, m_y + j * m_tile_height);
+      m_sprite.setPosition(m_x + (i * m_tile_width), m_y + (j * m_tile_height));
 
       t_window->draw(m_sprite);
     }

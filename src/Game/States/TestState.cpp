@@ -1,21 +1,22 @@
 #include "TestState.hpp"
 
-//TestState::TestState([[maybe_unused]] std::shared_ptr<Engine::StateStack> t_stack) {
 TestState::TestState(std::shared_ptr<Engine::StateStack> t_stack) {
   LOG_TRACE("TestState::TestState()");
 
   m_map = std::make_shared<Engine::Map>(ComputerGame::instance(), std::make_shared<Maps::TestMap>());
+  m_map->setPosition(30, 30);
 
   std::shared_ptr<Engine::Tileset> monsters_tileset = ComputerGame::instance().getTileset("monsters");
-  hero = sf::Sprite(
+  bob = sf::Sprite(
     *ComputerGame::instance().getTexture("monsters"),
     monsters_tileset->uvs[1]
   );
-  hero.setPosition(m_map->tileToPixel(2, 2));
-
-  auto pos = m_map->tileToPixel(2, 2);
-  std::cout << "HIHIHIHIIH" << std::endl;
-  std::cout << pos.x << " " << pos.y << std::endl;
+  jim = sf::Sprite(
+    *ComputerGame::instance().getTexture("monsters"),
+    monsters_tileset->uvs[1]
+  );
+  bob.setPosition(m_map->tileToPixel(0, 0));
+  jim.setPosition(m_map->tileToPixel(1, 1));
 }
 
 bool TestState::update(float t_dt) {
@@ -24,7 +25,9 @@ bool TestState::update(float t_dt) {
 
 void TestState::render(std::shared_ptr<Engine::Window> t_window) {
   m_map->render(t_window);
-  t_window->draw(hero);
+  t_window->draw(bob);
+  t_window->draw(jim);
+  ComputerGame::instance().quit();
 }
 
 void TestState::handleInput(sf::Event t_event) {

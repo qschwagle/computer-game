@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "Engine/Application.hpp"
 #include "States/TestState.hpp"
 
@@ -14,10 +16,9 @@ class ComputerGame : public Engine::Application {
     static ComputerGame& instance(void);
 
   protected:
-    /**
-     * @brief Loads the starting state of the Application
-     *
-     */
+    ComputerGame(void) :
+      Engine::Application("assets/manifests/tilesets.manifest", "assets/manifests/textures.manifest") {};
+
     void createInitialState(void) override;
 
 };

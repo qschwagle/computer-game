@@ -54,11 +54,22 @@ namespace Engine {
       *
       */
       std::shared_ptr<Engine::Window> m_window;
+
     protected:
+      Application(
+        std::string t_tilesets_manifest_path,
+        std::string t_textures_manifest_path) :
+        m_tilesets_manifest_path(t_tilesets_manifest_path),
+        m_textures_manifest_path(t_textures_manifest_path) {};
+
+
       bool m_running = true;
       sf::Event m_event;
       sf::Clock m_clock;
       sf::Time m_frame_time;
+
+      const std::string m_tilesets_manifest_path;
+      const std::string m_textures_manifest_path;
 
       /**
       * @brief Game state stack

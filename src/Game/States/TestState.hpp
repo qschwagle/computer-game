@@ -34,5 +34,6 @@ class TestState : public Engine::IState {
 
   protected:
     std::shared_ptr<Engine::Map> m_map;
-    sf::Sprite hero;
+    sf::Sprite bob;
+    sf::Sprite jim;
 };
