@@ -21,11 +21,8 @@ Engine::Map::Map(AssetProvider& t_asset_provider, std::shared_ptr<Engine::Atlas>
   // This isn't centering the map
   m_x = 0;
   m_y = 0;
-  // m_cam_x = Engine::NativeWidth / 2 + m_tile_width / 2;
-  // m_cam_y = Engine::NativeHeight / 2 + m_tile_height / 2;
   m_cam_x = 0;
   m_cam_y = 0;
-
 
   // Get the blocking tile by searching for the collision tileset
   for (auto tileset_iter = t_atlas->tilesets.begin(); tileset_iter != t_atlas->tilesets.end(); tileset_iter++) {
@@ -59,6 +56,7 @@ sf::Vector2i Engine::Map::pixelToTile(float t_x, float t_y) {
 sf::Vector2f Engine::Map::tileToPixel(uint t_x, uint t_y) {
   const int x_tile = std::clamp<uint>(t_x, 0, m_width);
   const int y_tile = std::clamp<uint>(t_y, 0, m_height);
+
   return sf::Vector2f((x_tile * m_tile_width) + m_x, (y_tile * m_tile_height) + m_y);
 }
 
@@ -67,7 +65,11 @@ void Engine::Map::setPosition(float t_x, float t_y) {
   m_y = t_y;
 }
 
-void Engine::Map::goTo(uint t_x, uint t_y) {
+void Engine::Map::goTo(sf::Vector2i t_pos) {
+  goTo(t_pos.x, t_pos.y);
+}
+
+void Engine::Map::goTo(int t_x, int t_y) {
   m_cam_x = t_x + Engine::NativeWidth / 2;
   m_cam_y = t_y + Engine::NativeHeight / 2;
 }
@@ -78,8 +80,8 @@ sf::Vector2u Engine::Map::getSize(void) {
 
 void Engine::Map::goToTile(uint t_x, uint t_y) {
   goTo(
-    (t_x * m_tile_width) + m_tile_width / 2,
-    (t_y * m_tile_height) + m_tile_height / 2
+    (t_x * m_tile_width) + m_tile_width / 2.0,
+    (t_y * m_tile_height) + m_tile_height / 2.0
   );
 }
 
@@ -107,22 +109,10 @@ void Engine::Map::renderLayer(std::shared_ptr<Engine::Window> t_window, Engine::
   auto bottom_right_coord  = pixelToTile(
       m_cam_x + (screenSize.x / 2.0),
       m_cam_y + (screenSize.y / 2.0));
-  // map x,y: 30,30
-  // top_left_coord: 6,6
-  // m_cam: 0,0
-  // screenSize: 1024,768
-  LOG_TRACE("map x,y: {},{}", m_x, m_y);
-  LOG_TRACE("bottom_right_coord: {},{}", bottom_right_coord.x, bottom_right_coord.y);
-  LOG_TRACE("m_cam: {},{}", m_cam_x, m_cam_y);
-  LOG_TRACE("screenSize: {},{}", screenSize.x, screenSize.y);
-  LOG_TRACE("m_tile_size: {},{}", m_tile_width, m_tile_height);
-
-  // therefore top_left_coord = pixelToTile(-512, -384)
-  // therefore bottom_right_coord = pixelToTile(512, 384)
 
   std::shared_ptr<sf::Texture> cached_texture = nullptr;
-  for (uint j = top_left_coord.y, y_mx = bottom_right_coord.y + 1; j < y_mx; ++j) {
-    for (uint i = top_left_coord.x, x_mx = bottom_right_coord.x; i <  x_mx + 1; ++i) {
+  for (uint k = 0, j = top_left_coord.y, y_mx = bottom_right_coord.y + 1; j < y_mx; ++j, ++k) {
+    for (uint n = 0, i = top_left_coord.x, x_mx = bottom_right_coord.x; i <  x_mx + 1; ++i, ++n) {
       uint tile = getTile(i, j);
       if (tile < 1) continue; // We don't render 0
 
@@ -132,7 +122,10 @@ void Engine::Map::renderLayer(std::shared_ptr<Engine::Window> t_window, Engine::
         cached_texture = m_textures[tile];
       }
       m_sprite.setTextureRect(m_uvs[tile]);
-      m_sprite.setPosition(m_x + (i * m_tile_width), m_y + (j * m_tile_height));
+      m_sprite.setPosition(
+        m_x + (k * m_tile_width),
+        m_y + (n * m_tile_height)
+      );
 
       t_window->draw(m_sprite);
     }
