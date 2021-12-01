@@ -81,7 +81,7 @@ void Engine::Application::loadTilesets() {
     std::string file_path = *it;
 
     // Instead of the manifest key, lets use what's in the tileset
-    auto tileset = std::make_shared<Engine::Tileset>(Engine::Tileset(file_path));
+		auto tileset = loadTilesetFromSimpleFormat(file_path);
 
     LOG_INFO("Loaded tileset {} -> {}", file_path, tileset->id);
 
@@ -120,3 +120,4 @@ std::shared_ptr<Engine::Tileset> Engine::Application::getTileset(std::string t_k
   auto tileset = m_tilesets.find(t_key);
   return tileset != m_tilesets.end() ? tileset->second : nullptr;
 }
+/* vim:set sw=2 ts=2: */

@@ -1,6 +1,8 @@
 #include "Atlas.hpp"
 
-Engine::Tileset::Tileset(const std::string t_file_path) {
+std::shared_ptr<Engine::Tileset> Engine::loadTilesetFromSimpleFormat(const std::string t_file_path) {
+	auto tileset = std::make_shared<Engine::Tileset>();
+
   std::vector<std::string> file_vec = Helper::getFileLines(t_file_path);
 
   for (auto iter = file_vec.begin(); iter < file_vec.end(); iter++) {
@@ -8,12 +10,14 @@ Engine::Tileset::Tileset(const std::string t_file_path) {
     std::string type;
     iss >> type;
 
-    if (type == "id") iss >> id;
-    else if (type == "texture") iss >> texture_src;
-    else if (type == "data") iss >> columns >> rows >> tile_height >> tile_width >> margin_x >> margin_y >> spacing;
+    if (type == "id") iss >> tileset->id;
+    else if (type == "texture") iss >> tileset->texture_src;
+    else if (type == "data") iss >> tileset->columns >> tileset->rows >> tileset->tile_height >> tileset->tile_width >> tileset->margin_x >> tileset->margin_y >> tileset->spacing;
   }
 
-  uvs = Helper::getTileRects(columns, rows, tile_height, tile_width, margin_x, margin_y, spacing);
+  tileset->uvs = Helper::getTileRects(tileset->columns, tileset->rows, tileset->tile_height, tileset->tile_width, tileset->margin_x, tileset->margin_y, tileset->spacing);
+
+	return tileset;
 }
 
 // Engine::Atlas::Atlas(Engine::AssetProvider& t_asset_provider, const std::string t_manifest_key)
@@ -60,4 +64,4 @@ Engine::Atlas::Atlas(const std::string t_file_path) {
   }
 
 }
-
+/* vim:set sw=2 ts=2: */

@@ -26,3 +26,4 @@ out/build/*
 .vs
 .vscode/c_cpp_properties.json
 .cache
+.DS_Store

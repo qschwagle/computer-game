@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <memory>
 
 #include <SFML/Graphics.hpp>
 
@@ -19,9 +20,10 @@ namespace Engine {
     std::vector<uint> collision;
   };
 
+
   class Tileset {
     public:
-      Tileset(const std::string t_file_path);
+      Tileset()=default;
 
       std::string id;
       uint columns;
@@ -34,6 +36,8 @@ namespace Engine {
       std::string texture_src;
       std::vector<sf::IntRect> uvs;
   };
+
+	std::shared_ptr<Engine::Tileset> loadTilesetFromSimpleFormat(const std::string t_file_path);
 
   class Atlas {
     public:
@@ -53,3 +57,4 @@ namespace Engine {
       std::vector<Layer> layers;
   };
 }
+/* vim: set sw=2 ts=2: */
