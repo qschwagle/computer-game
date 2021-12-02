@@ -28,7 +28,7 @@ class SimpleAssetProvider : public Engine::AssetProvider {
       std::string file_path = *it;
 
       // Instead of the manifest key, lets use what's in the tileset
-      auto tileset = Engine::loadTilesetFromSimpleFormat(file_path);
+      auto tileset = std::make_shared<Engine::Tileset>(Engine::loadTilesetFromSimpleFormat, file_path);
 
       LOG_INFO("Loaded tileset {} -> {}", file_path, tileset->id);
 

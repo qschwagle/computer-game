@@ -1,7 +1,10 @@
 #include "Atlas.hpp"
 
-std::shared_ptr<Engine::Tileset> Engine::loadTilesetFromSimpleFormat(const std::string t_file_path) {
-	auto tileset = std::make_shared<Engine::Tileset>();
+Engine::Tileset::Tileset(std::function<void(Tileset*, const std::string)> loader, const std::string t_file_path) {
+	loader(this, t_file_path);
+}
+
+void Engine::loadTilesetFromSimpleFormat(Engine::Tileset* tileset, const std::string t_file_path) {
 
   std::vector<std::string> file_vec = Helper::getFileLines(t_file_path);
 
@@ -16,15 +19,16 @@ std::shared_ptr<Engine::Tileset> Engine::loadTilesetFromSimpleFormat(const std::
   }
 
   tileset->uvs = Helper::getTileRects(tileset->columns, tileset->rows, tileset->tile_height, tileset->tile_width, tileset->margin_x, tileset->margin_y, tileset->spacing);
-
-	return tileset;
 }
+
+Engine::Atlas::Atlas(std::function<void(Atlas*, const std::string)> loader, const std::string t_file_path) {
+	loader(this, t_file_path);
+}	
 
 // Engine::Atlas::Atlas(Engine::AssetProvider& t_asset_provider, const std::string t_manifest_key)
   // : Engine::Atlas::Atlas(t_asset_provider.getAtlas(t_manifest_key)) { }
 
-Engine::Atlas::Atlas(const std::string t_file_path) {
-
+void Engine::loadAtlasFromSimpleFormat(Engine::Atlas* atlas, const std::string t_file_path) {
   std::vector<std::string> file_vec = Helper::getFileLines(t_file_path);
 
   for (auto iter = file_vec.begin(); iter < file_vec.end(); iter++) {
@@ -32,16 +36,16 @@ Engine::Atlas::Atlas(const std::string t_file_path) {
     std::string type;
     iss >> type;
 
-    if (type == "id") id = iss.str();
-    else if (type == "name") name = iss.str();
-    else if (type == "data") iss >> width >> height >> tile_width >> tile_height >> can_save;
+    if (type == "id") atlas->id = iss.str();
+    else if (type == "name") atlas->name = iss.str();
+    else if (type == "data") iss >> atlas->width >> atlas->height >> atlas->tile_width >> atlas->tile_height >> atlas->can_save;
     else if (type == "tileset") {
       uint first_tile;
       std::string tileset;
       iss >> first_tile >> tileset;
-      tilesets[first_tile] = tileset;
+      atlas->tilesets[first_tile] = tileset;
     } else if (type == "layer") {
-      Layer l;
+			Engine::Layer l;
       iss >> l.name;
 
       // We know the next three lines for a layer is the layer sectional data
@@ -59,9 +63,8 @@ Engine::Atlas::Atlas(const std::string t_file_path) {
       iss = std::istringstream(*iter);
       while (iss >> val) l.collision.push_back(val);
 
-      layers.push_back(l);
+      atlas->layers.push_back(l);
     }
   }
-
 }
 /* vim:set sw=2 ts=2: */

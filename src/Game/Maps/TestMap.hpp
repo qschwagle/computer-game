@@ -5,6 +5,7 @@
 namespace Maps {
   class TestMap : public Engine::Atlas {
     public:
-      TestMap() : Engine::Atlas("assets/maps/test.atlas") {};
+      TestMap() :  Engine::Atlas(Engine::loadAtlasFromSimpleFormat, "assets/maps/test.atlas")  {}
   };
 }
+/* vim:set sw=2 ts=2 et: */
